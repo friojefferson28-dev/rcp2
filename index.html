@@ -4,248 +4,195 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LearnStyle+</title>
-
 <style>
-/* ---------- CSS VARIABLES ---------- */
+/* ---------- CSS VARIABLES & THEMES ---------- */
 :root {
-    --bg: #ffffff;
-    --text: #000000;
-    --muted: #333333;
-    --accent: #e63946;
-    --card: #f5f5f5;
-    --shadow: rgba(0,0,0,0.2);
+    --bg: #ffffff; --text: #000000; --muted: #333333; --accent: #e63946;
+    --card: #f5f5f5; --shadow: rgba(0,0,0,0.2); --purple: #764ba2;
 }
-
 body.dark {
-    --bg: #121212;
-    --text: #f1f1f1;
-    --muted: #bbbbbb;
-    --accent: #ff6b6b;
-    --card: #1f1f1f;
-    --shadow: rgba(0,0,0,0.6);
+    --bg: #121212; --text: #f1f1f1; --muted: #bbbbbb; --accent: #ff6b6b;
+    --card: #1f1f1f; --shadow: rgba(0,0,0,0.6);
 }
 
 /* ---------- GLOBAL ---------- */
-* {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-body {
-    margin: 0;
-    background-color: var(--bg);
-    color: var(--text);
-}
+* { box-sizing: border-box; font-family: Arial, sans-serif; transition: 0.3s; }
+body { margin: 0; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
 
 /* ---------- HEADER ---------- */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    flex-wrap: wrap;
+header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
+.logo { font-weight: bold; font-size: 20px; }
+nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size: 14px; }
+.toggle { cursor: pointer; font-size: 20px; margin-left: 20px; }
+
+/* ---------- INTERFACE LAYOUT ---------- */
+.container { display: flex; padding: 40px; gap: 30px; align-items: center; }
+.left { width: 45%; }
+.left h1 { font-size: 42px; margin-bottom: 20px; }
+.right { width: 55%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.right img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; box-shadow: 0 6px 15px var(--shadow); }
+.wide { grid-column: span 2; } .tall { grid-row: span 2; height: 335px; }
+
+/* ---------- BUTTONS ---------- */
+.proceed { 
+    display: inline-block; margin-top: 30px; font-weight: bold; color: var(--text); 
+    text-decoration: none; border: none; border-bottom: 2px solid var(--text); 
+    padding-bottom: 4px; background: none; cursor: pointer; font-size: 16px;
 }
+.proceed:hover { color: var(--accent); border-color: var(--accent); letter-spacing: 1px; }
 
-.logo {
-    font-weight: bold;
-    font-size: 20px;
+/* ---------- REGISTRATION & SURVEY (The Purple Vibe) ---------- */
+.form-overlay {
+    display: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh; padding: 40px 20px; text-align: center; color: white;
 }
-
-nav a {
-    margin-left: 30px;
-    text-decoration: none;
-    color: var(--text);
-    transition: color 0.3s;
+.quiz-card {
+    background: white; color: #333; max-width: 650px; margin: auto;
+    padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
-
-nav a:hover {
-    color: var(--accent);
+.input-group { margin: 15px 0; text-align: left; }
+.input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+.input-group input, .input-group select { 
+    width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; 
 }
+.question { text-align: left; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.question label { display: block; margin: 8px 0; cursor: pointer; }
 
-/* ---------- TOGGLE ---------- */
-.toggle {
-    cursor: pointer;
-    font-size: 22px;
-    margin-left: 20px;
-}
-
-/* ---------- MAIN ---------- */
-.container {
-    display: flex;
-    padding: 40px;
-    gap: 30px;
-}
-
-.left {
-    width: 45%;
-}
-
-.left h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
-}
-
-.left p {
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-/* ---------- BUTTON ---------- */
-.proceed {
-    display: inline-block;
-    margin-top: 30px;
-    font-weight: bold;
-    color: var(--text);
-    text-decoration: none;
-    border-bottom: 2px solid var(--text);
-    padding-bottom: 4px;
-    transition: all 0.3s ease;
-}
-
-.proceed:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    letter-spacing: 1px;
-}
-
-/* ---------- IMAGES ---------- */
-.right {
-    width: 55%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.right img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 6px;
-    box-shadow: 0 6px 15px var(--shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.right img:hover {
-    transform: scale(1.05);
-}
-
-/* ---------- GRID MODIFIERS ---------- */
-.wide {
-    grid-column: span 2;
-}
-
-.tall {
-    grid-row: span 2;
-    height: 335px;
-}
-
-/* ---------- TABLET ---------- */
-@media (max-width: 900px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .left, .right {
-        width: 100%;
-    }
-
-    .right {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .tall {
-        grid-row: span 1;
-        height: 160px;
-    }
-}
-
-/* ---------- MOBILE ---------- */
-@media (max-width: 500px) {
-    header {
-        padding: 20px;
-        text-align: center;
-    }
-
-    nav {
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    nav a {
-        margin: 0 12px;
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    .left h1 {
-        font-size: 30px;
-    }
-
-    .right {
-        grid-template-columns: 1fr;
-    }
-
-    .right img {
-        height: 200px;
-    }
-}
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) { .container { flex-direction: column; } .left, .right { width: 100%; } }
 </style>
 </head>
-
 <body>
 
-<header>
-    <div class="logo">📘 LEARNSTYLE+.COM</div>
-
-    <nav>
-        <a href="#">HOME</a>
-        <a href="#">ABOUT US</a>
-        <span class="toggle" id="themeToggle">🌙</span>
-    </nav>
-</header>
-
-<div class="container">
-    <div class="left">
-        <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
-        <p>
-            LEARNSTYLE+.COM IS A WEBSITE INDICATOR WHEREIN YOU CAN
-            IDENTIFY YOUR LEARNING STYLE THROUGH ANSWERING MULTIPLE
-            QUESTIONS ABOUT DIFFERENT LEARNING STYLES SUCH AS:
-            VISUAL, AUDITORY, INTERPERSONAL, AND INDEPENDENT.
-        </p>
-
-        <a href="quiz.html" class="proceed">CLICK HERE TO PROCEED</a>
+<div id="section-interface">
+    <header>
+        <div class="logo">LEARNSTYLE+.COM</div>
+        <nav>
+            <a href="#">HOME</a>
+            <a href="#">ABOUT US</a>
+            <span class="toggle" id="themeToggle">🌙</span>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="left">
+            <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
+            <p>IDENTIFY YOUR LEARNING STYLE THROUGH 16 QUESTIONS. VISUAL, AUDITORY, INTERPERSONAL, AND INDEPENDENT.</p>
+            <button class="proceed" onclick="goToRegistration()">CLICK HERE TO PROCEED</button>
+        </div>
+        <div class="right">
+            <img src="image1.jpg">
+            <img src="image2.jpg">
+            <img src="image3.jpg" class="tall">
+            <img src="image4.jpg" class="wide">
+            <img src="image5.jpg">
+        </div>
     </div>
+</div>
 
-    <div class="right">
-        <img src="image1.jpg">
-        <img src="image2.jpg">
-        <img src="image3.jpg" class="tall">
-        <img src="image4.jpg" class="wide">
-        <img src="image5.jpg">
+<div id="section-register" class="form-overlay">
+    <div class="quiz-card">
+        <h2 style="color:var(--purple)">Tell us about yourself!</h2>
+        <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="userName" placeholder="Enter your name">
+        </div>
+        <div class="input-group">
+            <label>Age</label>
+            <input type="number" id="userAge" placeholder="17">
+        </div>
+        <div class="input-group">
+            <label>Gender</label>
+            <select id="userGender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <button class="proceed" style="border:1px solid var(--purple); padding: 10px 20px; border-radius: 50px;" onclick="startSurvey()">START SURVEY</button>
+    </div>
+</div>
+
+<div id="section-survey" class="form-overlay">
+    <div class="quiz-card">
+        <h2 id="welcomeUser" style="color:var(--purple)"></h2>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. How do you learn best?</p>
+                <label><input type="radio" name="q1" value="visual" required> By seeing diagrams/images</label>
+                <label><input type="radio" name="q1" value="auditory"> By listening to explanations</label>
+                <label><input type="radio" name="q1" value="interpersonal"> By studying with others</label>
+                <label><input type="radio" name="q1" value="independent"> By studying alone</label>
+            </div>
+
+            <div class="question"><p>2. What helps you remember lessons?</p>
+                <label><input type="radio" name="q2" value="visual"> Charts and videos</label>
+                <label><input type="radio" name="q2" value="auditory"> Lectures and discussions</label>
+                <label><input type="radio" name="q2" value="interpersonal"> Group activities</label>
+                <label><input type="radio" name="q2" value="independent"> Self-review and notes</label>
+            </div>
+            <div class="question"><p>16. You feel confident learning when:</p>
+                <label><input type="radio" name="q16" value="visual"> You see examples</label>
+                <label><input type="radio" name="q16" value="auditory"> You hear guidance</label>
+                <label><input type="radio" name="q16" value="interpersonal"> You work with others</label>
+                <label><input type="radio" name="q16" value="independent"> You work alone</label>
+            </div>
+
+            <button type="button" class="proceed" style="background:var(--purple); color:white; border:none; padding:15px; width:100%; border-radius:50px;" onclick="calculateResult()">FINISH</button>
+        </form>
+        <div id="result" style="display:none; margin-top:20px; font-weight:bold; color:var(--purple);"></div>
     </div>
 </div>
 
 <script>
+// THEME TOGGLE
 const toggle = document.getElementById("themeToggle");
-const body = document.body;
+toggle.onclick = () => {
+    document.body.classList.toggle("dark");
+    toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+};
 
-// Load saved theme
-if (localStorage.getItem("theme") === "dark") {
-    body.classList.add("dark");
-    toggle.textContent = "☀️";
+// NAVIGATION FUNCTIONS
+function goToRegistration() {
+    document.getElementById('section-interface').style.display = 'none';
+    document.getElementById('section-register').style.display = 'block';
 }
 
-toggle.onclick = () => {
-    body.classList.toggle("dark");
-    const isDark = body.classList.contains("dark");
-    toggle.textContent = isDark ? "☀️" : "🌙";
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-};
+function startSurvey() {
+    const name = document.getElementById('userName').value;
+    if(!name) { alert("Please enter your name!"); return; }
+    
+    document.getElementById('section-register').style.display = 'none';
+    document.getElementById('section-survey').style.display = 'block';
+    document.getElementById('welcomeUser').textContent = "Good luck, " + name + "!";
+    window.scrollTo(0,0);
+}
+
+// SCORING LOGIC
+function calculateResult() {
+    let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
+    const answers = document.querySelectorAll('input[type="radio"]:checked');
+
+    if (answers.length < 3) { // Use 16 once all questions are added
+        alert("Please answer all questions!"); return;
+    }
+
+    answers.forEach(a => { scores[a.value]++; });
+    const max = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
+    let styles = [];
+    if (scores.visual === max) styles.push("Visual Learner 📊");
+    if (scores.auditory === max) styles.push("Auditory Learner 🎧");
+    if (scores.interpersonal === max) styles.push("Interpersonal Learner 🤝");
+    if (scores.independent === max) styles.push("Independent Learner 📚");
+
+    const resDiv = document.getElementById('result');
+    resDiv.style.display = 'block';
+    resDiv.innerHTML = "RESULT: " + styles.join(" & ");
+}
 </script>
+</body>
+</html>
 
 </body>
 </html>
+
