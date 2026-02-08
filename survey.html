@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cognitive Learning Style Questionnaire</title>
+    <style>
+        /* --- INTERFACE DESIGN (CSS) --- */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8; /* [cite: 2] */
+            padding: 20px;
+        }
+        .box {
+            max-width: 650px;
+            background: white; /* [cite: 3] */
+            padding: 25px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 { text-align: center; }
+        
+        /* Questionnaire Styling */
+        .question {
+            margin-top: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        /* Button Interface */
+        button {
+            margin-top: 25px;
+            width: 100%; /* [cite: 7] */
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3; /* [cite: 9] */
+        }
+        
+        /* Results Interface */
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #e9f5ff; /*  */
+            border-radius: 5px;
+            font-weight: bold;
+            display: none; /* Hidden until calculated */
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Cognitive Learning Style Questionnaire</h2>
+
+    <form id="quiz">
+        <div class="question">
+            <p>1. How do you learn best?</p>
+            <label><input type="radio" name="q1" value="visual"> By seeing diagrams and images</label>
+            <label><input type="radio" name="q1" value="auditory"> By listening to explanations</label>
+            <label><input type="radio" name="q1" value="interpersonal"> By studying with others</label>
+            <label><input type="radio" name="q1" value="independent"> By studying alone</label>
+        </div>
+
+        <div class="question">
+            <p>2. What helps you remember lessons?</p>
+            <label><input type="radio" name="q2" value="visual"> Charts and videos</label>
+            <label><input type="radio" name="q2" value="auditory"> Lectures and discussions</label>
+            <label><input type="radio" name="q2" value="interpersonal"> Group activities</label>
+            <label><input type="radio" name="q2" value="independent"> Self-review and notes</label>
+        </div>
+
+        <div class="question">
+            <p>3. In class, you prefer:</p>
+            <label><input type="radio" name="q3" value="visual"> Visual presentations</label>
+            <label><input type="radio" name="q3" value="auditory"> Listening to the teacher</label>
+            <label><input type="radio" name="q3" value="interpersonal"> Working with classmates</label>
+            <label><input type="radio" name="q3" value="independent"> Working quietly on your own</label>
+        </div>
+
+        <div class="question">
+            <p>4. When studying at home, you usually:</p>
+            <label><input type="radio" name="q4" value="visual"> Watch videos or read visuals</label>
+            <label><input type="radio" name="q4" value="auditory"> Read aloud or listen to audio</label>
+            <label><input type="radio" name="q4" value="interpersonal"> Study with friends</label>
+            <label><input type="radio" name="q4" value="independent"> Study alone independently</label>
+        </div>
+
+        <button type="button" onclick="calculateResult()">See My Learning Style</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+/* --- LOGIC SECTION --- */
+function calculateResult() {
+    let scores = {
+        visual: 0,
+        auditory: 0,
+        interpersonal: 0,
+        independent: 0
+    };
+    
+    // Selects only checked radio buttons [cite: 40]
+    const answers = document.querySelectorAll('input[type="radio"]:checked');
+
+    // Validation: Check if all questions (for example, 16) are answered [cite: 41]
+    if (answers.length < 4) { // Update this number to match your total questions
+        alert("Please answer all questions before submitting.");
+        return;
+    }
+
+    answers.forEach(answer => {
+        scores[answer.value]++; // [cite: 41]
+    });
+
+    // Determine the highest score [cite: 42]
+    const maxScore = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
+    let dominantStyles = [];
+
+    if (scores.visual === maxScore) dominantStyles.push("Visual Learner 📊"); // [cite: 43]
+    if (scores.auditory === maxScore) dominantStyles.push("Auditory Learner 🎧"); // [cite: 43]
+    if (scores.interpersonal === maxScore) dominantStyles.push("Interpersonal Learner 🤝"); // [cite: 44]
+    if (scores.independent === maxScore) dominantStyles.push("Independent Learner 📚"); // [cite: 44]
+
+    // Display the Interface Result [cite: 45-47]
+    const resultDiv = document.getElementById("result");
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = dominantStyles.length === 1 
+        ? "Your dominant cognitive learning style is:<br><br>" + dominantStyles[0]
+        : "You have multiple dominant cognitive learning styles:<br><br>" + dominantStyles.join("<br>");
+}
+</script>
+
+</body>
+</html>
