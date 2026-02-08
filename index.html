@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cognitive Learning Style Questionnaire</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; padding: 20px; }
+        .box { max-width: 650px; background: white; padding: 25px; margin: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; }
+        .question { margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        button { margin-top: 25px; width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        #result { margin-top: 25px; padding: 15px; background: #e9f5ff; border-radius: 5px; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Cognitive Learning Style Questionnaire</h2>
+    <form id="quiz">
+        <div class="question">
+            <p>1. How do you learn best?</p>
+            <label><input type="radio" name="q1" value="visual"> By seeing diagrams</label><br>
+            <label><input type="radio" name="q1" value="auditory"> By listening</label><br>
+            <label><input type="radio" name="q1" value="interpersonal"> With others</label><br>
+            <label><input type="radio" name="q1" value="independent"> Alone</label>
+        </div>
+
+        <div class="question">
+            <p>11. When do you find yourself more focused?</p>
+            <label><input type="radio" name="q11" value="visual"> Reviewing notes</label><br>
+            <label><input type="radio" name="q11" value="auditory"> Listening to music</label><br>
+            <label><input type="radio" name="q11" value="interpersonal"> Studying with friends</label><br>
+            <label><input type="radio" name="q11" value="independent"> Quiet environment</label>
+        </div>
+
+        <div class="question">
+            <p>14. You understand lessons better after:</p>
+            <label><input type="radio" name="q14" value="visual"> Reviewing visuals</label><br>
+            <label><input type="radio" name="q14" value="auditory"> Listening again</label><br>
+            <label><input type="radio" name="q14" value="interpersonal"> Group discussion</label><br>
+            <label><input type="radio" name="q14" value="independent"> Self-review</label>
+        </div>
+
+        <div class="question">
+            <p>15. You learn best when:</p>
+            <label><input type="radio" name="q15" value="visual"> Watching demonstrations</label><br>
+            <label><input type="radio" name="q15" value="auditory"> Listening carefully</label><br>
+            <label><input type="radio" name="q15" value="interpersonal"> Sharing ideas</label><br>
+            <label><input type="radio" name="q15" value="independent"> Exploring alone</label>
+        </div>
+
+        <div class="question">
+            <p>16. You feel confident learning when:</p>
+            <label><input type="radio" name="q16" value="visual"> You see examples</label><br>
+            <label><input type="radio" name="q16" value="auditory"> You hear guidance</label><br>
+            <label><input type="radio" name="q16" value="interpersonal"> You work with others</label><br>
+            <label><input type="radio" name="q16" value="independent"> You work alone</label>
+        </div>
+
+        <button type="button" onclick="calculateResult()">See My Learning Style</button>
+    </form>
+    <div id="result"></div>
+</div>
+
+<script>
+function calculateResult() {
+    let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
+    const answers = document.querySelectorAll('input[type="radio"]:checked');
+
+    // FIXED: Now checks for all 16 answers instead of just 10
+    if (answers.length < 16) {
+        alert("Please answer all 16 questions before submitting.");
+        return;
+    }
+
+    answers.forEach(answer => { scores[answer.value]++; });
+
+    const maxScore = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
+    let dominantStyles = [];
+    if (scores.visual === maxScore) dominantStyles.push("Visual Learner 📊");
+    if (scores.auditory === maxScore) dominantStyles.push("Auditory Learner 🎧");
+    if (scores.interpersonal === maxScore) dominantStyles.push("Interpersonal Learner 🤝");
+    if (scores.independent === maxScore) dominantStyles.push("Independent Learner 📚");
+
+    const resultBox = document.getElementById("result");
+    resultBox.style.display = "block";
+    resultBox.innerHTML = "Your dominant style is:<br><br>" + dominantStyles.join("<br>");
+}
+</script>
+</body>
+</html>
