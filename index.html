@@ -5,62 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LearnStyle+</title>
 <style>
-/* ---------- CSS VARIABLES & THEMES ---------- */
-:root {
-    --bg: #ffffff; --text: #000000; --muted: #333333; --accent: #e63946;
-    --card: #f5f5f5; --shadow: rgba(0,0,0,0.2); --purple: #764ba2;
-}
-body.dark {
-    --bg: #121212; --text: #f1f1f1; --muted: #bbbbbb; --accent: #ff6b6b;
-    --card: #1f1f1f; --shadow: rgba(0,0,0,0.6);
-}
+    /* ---------- CSS VARIABLES & THEMES ---------- */
+    :root {
+        --bg: #ffffff; --text: #000000; --muted: #333333; --accent: #e63946;
+        --card: #f5f5f5; --shadow: rgba(0,0,0,0.2); --purple: #764ba2;
+    }
+    body.dark {
+        --bg: #121212; --text: #f1f1f1; --muted: #bbbbbb; --accent: #ff6b6b;
+        --card: #1f1f1f; --shadow: rgba(0,0,0,0.6);
+    }
 
-/* ---------- GLOBAL ---------- */
-* { box-sizing: border-box; font-family: Arial, sans-serif; transition: 0.3s; }
-body { margin: 0; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+    /* ---------- GLOBAL ---------- */
+    * { box-sizing: border-box; font-family: Arial, sans-serif; transition: 0.3s; }
+    body { margin: 0; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
 
-/* ---------- HEADER ---------- */
-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
-.logo { font-weight: bold; font-size: 20px; }
-nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size: 14px; }
-.toggle { cursor: pointer; font-size: 20px; margin-left: 20px; }
+    /* ---------- HEADER ---------- */
+    header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
+    .logo { font-weight: bold; font-size: 20px; }
+    nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size: 14px; }
+    .toggle { cursor: pointer; font-size: 20px; margin-left: 20px; }
 
-/* ---------- INTERFACE LAYOUT ---------- */
-.container { display: flex; padding: 40px; gap: 30px; align-items: center; }
-.left { width: 45%; }
-.left h1 { font-size: 42px; margin-bottom: 20px; }
-.right { width: 55%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.right img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; box-shadow: 0 6px 15px var(--shadow); }
-.wide { grid-column: span 2; } .tall { grid-row: span 2; height: 335px; }
+    /* ---------- LANDING INTERFACE ---------- */
+    .container { display: flex; padding: 40px; gap: 30px; align-items: center; }
+    .left { width: 45%; }
+    .left h1 { font-size: 42px; margin-bottom: 20px; }
+    .left p { color: var(--muted); line-height: 1.6; }
+    .right { width: 55%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .right img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; box-shadow: 0 6px 15px var(--shadow); }
+    .wide { grid-column: span 2; } .tall { grid-row: span 2; height: 335px; }
 
-/* ---------- BUTTONS ---------- */
-.proceed { 
-    display: inline-block; margin-top: 30px; font-weight: bold; color: var(--text); 
-    text-decoration: none; border: none; border-bottom: 2px solid var(--text); 
-    padding-bottom: 4px; background: none; cursor: pointer; font-size: 16px;
-}
-.proceed:hover { color: var(--accent); border-color: var(--accent); letter-spacing: 1px; }
+    /* ---------- BUTTONS ---------- */
+    .proceed { 
+        display: inline-block; margin-top: 30px; font-weight: bold; color: var(--text); 
+        text-decoration: none; border: none; border-bottom: 2px solid var(--text); 
+        padding-bottom: 4px; background: none; cursor: pointer; font-size: 16px;
+    }
+    .proceed:hover { color: var(--accent); border-color: var(--accent); letter-spacing: 1px; }
 
-/* ---------- REGISTRATION & SURVEY (The Purple Vibe) ---------- */
-.form-overlay {
-    display: none;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh; padding: 40px 20px; text-align: center; color: white;
-}
-.quiz-card {
-    background: white; color: #333; max-width: 650px; margin: auto;
-    padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.input-group { margin: 15px 0; text-align: left; }
-.input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-.input-group input, .input-group select { 
-    width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; 
-}
-.question { text-align: left; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-.question label { display: block; margin: 8px 0; cursor: pointer; }
+    /* ---------- FORM & SURVEY OVERLAYS ---------- */
+    .form-overlay {
+        display: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh; padding: 40px 20px; text-align: center; color: white;
+    }
+    .quiz-card {
+        background: white; color: #333; max-width: 650px; margin: auto;
+        padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .input-group { margin: 15px 0; text-align: left; }
+    .input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+    .input-group input, .input-group select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+    
+    .question { text-align: left; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    .question p { font-weight: bold; margin-bottom: 10px; }
+    .question label { display: block; margin: 8px 0; cursor: pointer; padding: 5px; border-radius: 5px; }
+    .question label:hover { background-color: #f0f0f0; }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) { .container { flex-direction: column; } .left, .right { width: 100%; } }
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) { .container { flex-direction: column; } .left, .right { width: 100%; } }
 </style>
 </head>
 <body>
@@ -69,7 +70,7 @@ nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size:
     <header>
         <div class="logo">LEARNSTYLE+.COM</div>
         <nav>
-            <a href="#">HOME</a>
+            <a href="index.html">HOME</a>
             <a href="#">ABOUT US</a>
             <span class="toggle" id="themeToggle">🌙</span>
         </nav>
@@ -77,7 +78,7 @@ nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size:
     <div class="container">
         <div class="left">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
-            <p>IDENTIFY YOUR LEARNING STYLE THROUGH 16 QUESTIONS. VISUAL, AUDITORY, INTERPERSONAL, AND INDEPENDENT.</p>
+            <p>LEARNSTYLE+.COM IS A WEBSITE INDICATOR WHEREIN YOU CAN IDENTIFY YOUR LEARNING STYLE THROUGH 16 QUESTIONS ABOUT VISUAL, AUDITORY, INTERPERSONAL, AND INDEPENDENT LEARNING.</p>
             <button class="proceed" onclick="goToRegistration()">CLICK HERE TO PROCEED</button>
         </div>
         <div class="right">
@@ -92,10 +93,10 @@ nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size:
 
 <div id="section-register" class="form-overlay">
     <div class="quiz-card">
-        <h2 style="color:var(--purple)">Tell us about yourself!</h2>
+        <h2 style="color:var(--purple)">Student Profile</h2>
         <div class="input-group">
-            <label>Full Name</label>
-            <input type="text" id="userName" placeholder="Enter your name">
+            <label>Full Name (Optional)</label>
+            <input type="text" id="userName" placeholder="Your name or nickname">
         </div>
         <div class="input-group">
             <label>Age</label>
@@ -109,27 +110,103 @@ nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size:
                 <option value="Other">Other</option>
             </select>
         </div>
-        <button class="proceed" style="border:1px solid var(--purple); padding: 10px 20px; border-radius: 50px;" onclick="startSurvey()">START SURVEY</button>
+        <button class="proceed" style="border:1px solid var(--purple); padding: 10px 20px; border-radius: 50px;" onclick="startSurvey()">START THE TEST</button>
     </div>
 </div>
 
 <div id="section-survey" class="form-overlay">
     <div class="quiz-card">
-        <h2 id="welcomeUser" style="color:var(--purple)"></h2>
+        <h2 id="welcomeHeader" style="color:var(--purple)">Questionnaire</h2>
         <form id="quizForm">
-            <div class="question">
-                <p>1. How do you learn best?</p>
-                <label><input type="radio" name="q1" value="visual" required> By seeing diagrams/images</label>
+            <div class="question"><p>1. How do you learn best?</p>
+                <label><input type="radio" name="q1" value="visual" required> By seeing diagrams and images</label>
                 <label><input type="radio" name="q1" value="auditory"> By listening to explanations</label>
                 <label><input type="radio" name="q1" value="interpersonal"> By studying with others</label>
                 <label><input type="radio" name="q1" value="independent"> By studying alone</label>
             </div>
-
             <div class="question"><p>2. What helps you remember lessons?</p>
                 <label><input type="radio" name="q2" value="visual"> Charts and videos</label>
                 <label><input type="radio" name="q2" value="auditory"> Lectures and discussions</label>
                 <label><input type="radio" name="q2" value="interpersonal"> Group activities</label>
                 <label><input type="radio" name="q2" value="independent"> Self-review and notes</label>
+            </div>
+            <div class="question"><p>3. In class, you prefer:</p>
+                <label><input type="radio" name="q3" value="visual"> Visual presentations</label>
+                <label><input type="radio" name="q3" value="auditory"> Listening to the teacher</label>
+                <label><input type="radio" name="q3" value="interpersonal"> Working with classmates</label>
+                <label><input type="radio" name="q3" value="independent"> Working quietly on your own</label>
+            </div>
+            <div class="question"><p>4. When studying at home, you usually:</p>
+                <label><input type="radio" name="q4" value="visual"> Watch videos or read visuals</label>
+                <label><input type="radio" name="q4" value="auditory"> Read aloud or listen to audio</label>
+                <label><input type="radio" name="q4" value="interpersonal"> Study with friends</label>
+                <label><input type="radio" name="q4" value="independent"> Study alone independently</label>
+            </div>
+            <div class="question"><p>5. You understand a topic better when:</p>
+                <label><input type="radio" name="q5" value="visual"> You see examples or illustrations</label>
+                <label><input type="radio" name="q5" value="auditory"> Someone explains it verbally</label>
+                <label><input type="radio" name="q5" value="interpersonal"> You discuss it with others</label>
+                <label><input type="radio" name="q5" value="independent"> You explore it on your own</label>
+            </div>
+            <div class="question"><p>6. During group work, you:</p>
+                <label><input type="radio" name="q6" value="visual"> Focus on visual aids and plans</label>
+                <label><input type="radio" name="q6" value="auditory"> Listen and contribute verbally</label>
+                <label><input type="radio" name="q6" value="interpersonal"> Enjoy collaborating actively</label>
+                <label><input type="radio" name="q6" value="independent"> Prefer working solo if allowed</label>
+            </div>
+            <div class="question"><p>7. When reviewing for exams, you prefer:</p>
+                <label><input type="radio" name="q7" value="visual"> Mind maps and diagrams</label>
+                <label><input type="radio" name="q7" value="auditory"> Recorded notes or discussions</label>
+                <label><input type="radio" name="q7" value="interpersonal"> Reviewing with classmates</label>
+                <label><input type="radio" name="q7" value="independent"> Quiet self-study sessions</label>
+            </div>
+            <div class="question"><p>8. You stay focused best when:</p>
+                <label><input type="radio" name="q8" value="visual"> Materials are visually engaging</label>
+                <label><input type="radio" name="q8" value="auditory"> You can listen and respond</label>
+                <label><input type="radio" name="q8" value="interpersonal"> Others are learning with you</label>
+                <label><input type="radio" name="q8" value="independent"> You work without distractions</label>
+            </div>
+            <div class="question"><p>9. You prefer instructions that are:</p>
+                <label><input type="radio" name="q9" value="visual"> Written with images or steps</label>
+                <label><input type="radio" name="q9" value="auditory"> Explained verbally</label>
+                <label><input type="radio" name="q9" value="interpersonal"> Explained through discussion</label>
+                <label><input type="radio" name="q9" value="independent"> Short so you can figure it out</label>
+            </div>
+            <div class="question"><p>10. Learning is most enjoyable for you when:</p>
+                <label><input type="radio" name="q10" value="visual"> Lessons use visuals and media</label>
+                <label><input type="radio" name="q10" value="auditory"> There is active listening</label>
+                <label><input type="radio" name="q10" value="interpersonal"> You interact with others</label>
+                <label><input type="radio" name="q10" value="independent"> You control your pace alone</label>
+            </div>
+            <div class="question"><p>11. When do you find yourself more focused:</p>
+                <label><input type="radio" name="q11" value="visual"> Reviewing through notes/lectures</label>
+                <label><input type="radio" name="q11" value="auditory"> Listening to music</label>
+                <label><input type="radio" name="q11" value="interpersonal"> Studying with friends</label>
+                <label><input type="radio" name="q11" value="independent"> In a quiet environment</label>
+            </div>
+            <div class="question"><p>12. You remember information best by:</p>
+                <label><input type="radio" name="q12" value="visual"> Seeing it written</label>
+                <label><input type="radio" name="q12" value="auditory"> Hearing it explained</label>
+                <label><input type="radio" name="q12" value="interpersonal"> Talking about it</label>
+                <label><input type="radio" name="q12" value="independent"> Studying it alone</label>
+            </div>
+            <div class="question"><p>13. You prefer working on projects:</p>
+                <label><input type="radio" name="q13" value="visual"> With visuals and layouts</label>
+                <label><input type="radio" name="q13" value="auditory"> With discussions</label>
+                <label><input type="radio" name="q13" value="interpersonal"> With a group</label>
+                <label><input type="radio" name="q13" value="independent"> Independently</label>
+            </div>
+            <div class="question"><p>14. You understand lessons better after:</p>
+                <label><input type="radio" name="q14" value="visual"> Reviewing visuals</label>
+                <label><input type="radio" name="q14" value="auditory"> Listening again</label>
+                <label><input type="radio" name="q14" value="interpersonal"> Group discussion</label>
+                <label><input type="radio" name="q14" value="independent"> Self-review</label>
+            </div>
+            <div class="question"><p>15. You learn best when:</p>
+                <label><input type="radio" name="q15" value="visual"> Watching demonstrations</label>
+                <label><input type="radio" name="q15" value="auditory"> Listening carefully</label>
+                <label><input type="radio" name="q15" value="interpersonal"> Sharing ideas</label>
+                <label><input type="radio" name="q15" value="independent"> Exploring alone</label>
             </div>
             <div class="question"><p>16. You feel confident learning when:</p>
                 <label><input type="radio" name="q16" value="visual"> You see examples</label>
@@ -138,61 +215,62 @@ nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size:
                 <label><input type="radio" name="q16" value="independent"> You work alone</label>
             </div>
 
-            <button type="button" class="proceed" style="background:var(--purple); color:white; border:none; padding:15px; width:100%; border-radius:50px;" onclick="calculateResult()">FINISH</button>
+            <button type="button" class="proceed" style="background:var(--purple); color:white; border:none; padding:15px; width:100%; border-radius:50px; margin-top:40px;" onclick="calculateResult()">FINISH TEST</button>
         </form>
-        <div id="result" style="display:none; margin-top:20px; font-weight:bold; color:var(--purple);"></div>
+        <div id="result" style="display:none; margin-top:25px; padding:20px; background:#f0fdf4; border:2px solid #22c55e; border-radius:15px; font-weight:bold;"></div>
     </div>
 </div>
 
 <script>
-// THEME TOGGLE
-const toggle = document.getElementById("themeToggle");
-toggle.onclick = () => {
-    document.body.classList.toggle("dark");
-    toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-};
+    // THEME TOGGLE LOGIC
+    const toggle = document.getElementById("themeToggle");
+    toggle.onclick = () => {
+        document.body.classList.toggle("dark");
+        toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    };
 
-// NAVIGATION FUNCTIONS
-function goToRegistration() {
-    document.getElementById('section-interface').style.display = 'none';
-    document.getElementById('section-register').style.display = 'block';
-}
-
-function startSurvey() {
-    const name = document.getElementById('userName').value;
-    if(!name) { alert("Please enter your name!"); return; }
-    
-    document.getElementById('section-register').style.display = 'none';
-    document.getElementById('section-survey').style.display = 'block';
-    document.getElementById('welcomeUser').textContent = "Good luck, " + name + "!";
-    window.scrollTo(0,0);
-}
-
-// SCORING LOGIC
-function calculateResult() {
-    let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
-    const answers = document.querySelectorAll('input[type="radio"]:checked');
-
-    if (answers.length < 3) { // Use 16 once all questions are added
-        alert("Please answer all questions!"); return;
+    // NAVIGATION LOGIC
+    function goToRegistration() {
+        document.getElementById('section-interface').style.display = 'none';
+        document.getElementById('section-register').style.display = 'block';
     }
 
-    answers.forEach(a => { scores[a.value]++; });
-    const max = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
-    let styles = [];
-    if (scores.visual === max) styles.push("Visual Learner 📊");
-    if (scores.auditory === max) styles.push("Auditory Learner 🎧");
-    if (scores.interpersonal === max) styles.push("Interpersonal Learner 🤝");
-    if (scores.independent === max) styles.push("Independent Learner 📚");
+    function startSurvey() {
+        const nameInput = document.getElementById('userName').value;
+        document.getElementById('section-register').style.display = 'none';
+        document.getElementById('section-survey').style.display = 'block';
+        document.getElementById('welcomeHeader').textContent = nameInput ? "Welcome, " + nameInput + "!" : "Welcome!";
+        window.scrollTo(0,0);
+    }
 
-    const resDiv = document.getElementById('result');
-    resDiv.style.display = 'block';
-    resDiv.innerHTML = "RESULT: " + styles.join(" & ");
-}
+    // SCORING LOGIC
+    function calculateResult() {
+        let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
+        const answers = document.querySelectorAll('input[type="radio"]:checked');
+
+        if (answers.length < 16) {
+            alert("Oops! You missed " + (16 - answers.length) + " questions. Please answer all 16!");
+            return;
+        }
+
+        answers.forEach(a => { scores[a.value]++; });
+        const max = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
+        
+        let styles = [];
+        if (scores.visual === max) styles.push("Visual Learner 📊");
+        if (scores.auditory === max) styles.push("Auditory Learner 🎧");
+        if (scores.interpersonal === max) styles.push("Interpersonal Learner 🤝");
+        if (scores.independent === max) styles.push("Independent Learner 📚");
+
+        const resDiv = document.getElementById('result');
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = "BOOM! 🚀<br><br>Your dominant style is: " + styles.join(" & ");
+        resDiv.scrollIntoView({ behavior: 'smooth' });
+    }
 </script>
 </body>
 </html>
-
 </body>
 </html>
+
 
