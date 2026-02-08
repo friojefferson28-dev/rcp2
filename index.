@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Style Discovery - School Contest</title>
+    <style>
+        /* --- THE INTERFACE (Look & Feel) --- */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Cool purple gradient */
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .box { 
+            max-width: 600px; 
+            width: 90%;
+            background: white; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+            text-align: center;
+        }
+        h1 { color: #764ba2; margin-bottom: 10px; }
+        .question { text-align: left; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .question p { font-weight: 600; font-size: 1.1em; }
+        label { display: block; margin: 10px 0; cursor: pointer; padding: 10px; border-radius: 8px; transition: 0.3s; background: #f9f9f9; }
+        label:hover { background: #eef2ff; }
+        
+        button { 
+            margin-top: 30px; 
+            width: 100%; 
+            padding: 15px; 
+            background: #764ba2; 
+            color: white; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        button:hover { transform: scale(1.02); background: #5a3782; }
+        #result { margin-top: 25px; padding: 20px; background: #f0fdf4; border: 2px solid #22c55e; border-radius: 15px; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="landing" class="box">
+        <h1>Hey G11 & G12! 👋</h1>
+        <p>Ready to find out how your brain actually works? Take this quick 16-question survey for our school project!</p>
+        <button onclick="showSurvey()">Start Discovery</button>
+    </div>
+
+    <div id="survey-container" class="box" style="display: none;">
+        <h2>Your Learning Style</h2>
+        <form id="quiz">
+            
+            <div class="question">
+                <p>1. How do you learn best?</p>
+                <label><input type="radio" name="q1" value="visual"> By seeing diagrams and images</label>
+                <label><input type="radio" name="q1" value="auditory"> By listening to explanations</label>
+                <label><input type="radio" name="q1" value="interpersonal"> By studying with others</label>
+                <label><input type="radio" name="q1" value="independent"> By studying alone</label>
+            </div>
+
+            <div class="question">
+                <p>16. You feel confident learning when:</p>
+                <label><input type="radio" name="q16" value="visual"> You see examples</label>
+                <label><input type="radio" name="q16" value="auditory"> You hear guidance</label>
+                <label><input type="radio" name="q16" value="interpersonal"> You work with others</label>
+                <label><input type="radio" name="q16" value="independent"> You work alone</label>
+            </div>
+
+            <button type="button" onclick="calculateResult()">Get Results ✨</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+<script>
+    function showSurvey() {
+        document.getElementById('landing').style.display = 'none';
+        document.getElementById('survey-container').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function calculateResult() {
+        let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
+        const answers = document.querySelectorAll('input[type="radio"]:checked');
+
+        if (answers.length < 16) {
+            alert("Oops! You missed some questions. Please answer all 16!");
+            return;
+        }
+
+        answers.forEach(a => { scores[a.value]++; });
+
+        const maxScore = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
+        let dominantStyles = [];
+        if (scores.visual === maxScore) dominantStyles.push("Visual Learner 📊");
+        if (scores.auditory === maxScore) dominantStyles.push("Auditory Learner 🎧");
+        if (scores.interpersonal === maxScore) dominantStyles.push("Interpersonal Learner 🤝");
+        if (scores.independent === maxScore) dominantStyles.push("Independent Learner 📚");
+
+        const resultBox = document.getElementById("result");
+        resultBox.style.display = "block";
+        resultBox.innerHTML = "BOOM! 🚀<br><br>Your dominant style is:<br>" + dominantStyles.join(" & ");
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
