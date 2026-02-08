@@ -8,7 +8,8 @@
         .box { max-width: 650px; background: white; padding: 25px; margin: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         h2 { text-align: center; }
         .question { margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        button { margin-top: 25px; width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        label { display: block; margin-bottom: 5px; cursor: pointer; }
+        button { margin-top: 25px; width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
         button:hover { background: #0056b3; }
         #result { margin-top: 25px; padding: 15px; background: #e9f5ff; border-radius: 5px; font-weight: bold; display: none; }
     </style>
@@ -18,43 +19,101 @@
 <div class="box">
     <h2>Cognitive Learning Style Questionnaire</h2>
     <form id="quiz">
-        <div class="question">
-            <p>1. How do you learn best?</p>
-            <label><input type="radio" name="q1" value="visual"> By seeing diagrams</label><br>
-            <label><input type="radio" name="q1" value="auditory"> By listening</label><br>
-            <label><input type="radio" name="q1" value="interpersonal"> With others</label><br>
-            <label><input type="radio" name="q1" value="independent"> Alone</label>
+        <div class="question"><p>1. How do you learn best? [cite: 11]</p>
+            <label><input type="radio" name="q1" value="visual"> By seeing diagrams and images</label>
+            <label><input type="radio" name="q1" value="auditory"> By listening to explanations</label>
+            <label><input type="radio" name="q1" value="interpersonal"> By studying with others</label>
+            <label><input type="radio" name="q1" value="independent"> By studying alone</label>
+        </div>
+        <div class="question"><p>2. What helps you remember lessons? [cite: 13]</p>
+            <label><input type="radio" name="q2" value="visual"> Charts and videos</label>
+            <label><input type="radio" name="q2" value="auditory"> Lectures and discussions</label>
+            <label><input type="radio" name="q2" value="interpersonal"> Group activities</label>
+            <label><input type="radio" name="q2" value="independent"> Self-review and notes</label>
+        </div>
+        <div class="question"><p>3. In class, you prefer: [cite: 14]</p>
+            <label><input type="radio" name="q3" value="visual"> Visual presentations</label>
+            <label><input type="radio" name="q3" value="auditory"> Listening to the teacher</label>
+            <label><input type="radio" name="q3" value="interpersonal"> Working with classmates</label>
+            <label><input type="radio" name="q3" value="independent"> Working quietly on your own</label>
+        </div>
+        <div class="question"><p>4. When studying at home, you usually: [cite: 16]</p>
+            <label><input type="radio" name="q4" value="visual"> Watch videos or read visuals</label>
+            <label><input type="radio" name="q4" value="auditory"> Read aloud or listen to audio</label>
+            <label><input type="radio" name="q4" value="interpersonal"> Study with friends</label>
+            <label><input type="radio" name="q4" value="independent"> Study alone independently</label>
+        </div>
+        <div class="question"><p>5. You understand a topic better when: [cite: 18]</p>
+            <label><input type="radio" name="q5" value="visual"> You see examples or illustrations</label>
+            <label><input type="radio" name="q5" value="auditory"> Someone explains it verbally</label>
+            <label><input type="radio" name="q5" value="interpersonal"> You discuss it with others</label>
+            <label><input type="radio" name="q5" value="independent"> You explore it on your own</label>
+        </div>
+        <div class="question"><p>6. During group work, you: [cite: 20]</p>
+            <label><input type="radio" name="q6" value="visual"> Focus on visual aids and plans</label>
+            <label><input type="radio" name="q6" value="auditory"> Listen and contribute verbally</label>
+            <label><input type="radio" name="q6" value="interpersonal"> Enjoy collaborating actively</label>
+            <label><input type="radio" name="q6" value="independent"> Prefer working solo if allowed</label>
+        </div>
+        <div class="question"><p>7. When reviewing for exams, you prefer: [cite: 22]</p>
+            <label><input type="radio" name="q7" value="visual"> Mind maps and diagrams</label>
+            <label><input type="radio" name="q7" value="auditory"> Recorded notes or discussions</label>
+            <label><input type="radio" name="q7" value="interpersonal"> Reviewing with classmates</label>
+            <label><input type="radio" name="q7" value="independent"> Quiet self-study sessions</label>
+        </div>
+        <div class="question"><p>8. You stay focused best when: [cite: 23]</p>
+            <label><input type="radio" name="q8" value="visual"> Materials are visually engaging</label>
+            <label><input type="radio" name="q8" value="auditory"> You can listen and respond</label>
+            <label><input type="radio" name="q8" value="interpersonal"> Others are learning with you</label>
+            <label><input type="radio" name="q8" value="independent"> You work without distractions</label>
+        </div>
+        <div class="question"><p>9. You prefer instructions that are: [cite: 25]</p>
+            <label><input type="radio" name="q9" value="visual"> Written with images or steps</label>
+            <label><input type="radio" name="q9" value="auditory"> Explained verbally</label>
+            <label><input type="radio" name="q9" value="interpersonal"> Explained through discussion</label>
+            <label><input type="radio" name="q9" value="independent"> Short so you can figure it out</label>
+        </div>
+        <div class="question"><p>10. Learning is most enjoyable for you when: [cite: 27]</p>
+            <label><input type="radio" name="q10" value="visual"> Lessons use visuals and media</label>
+            <label><input type="radio" name="q10" value="auditory"> There is active listening</label>
+            <label><input type="radio" name="q10" value="interpersonal"> You interact with others</label>
+            <label><input type="radio" name="q10" value="independent"> You control your pace alone</label>
         </div>
 
-        <div class="question">
-            <p>11. When do you find yourself more focused?</p>
-            <label><input type="radio" name="q11" value="visual"> Reviewing notes</label><br>
-            <label><input type="radio" name="q11" value="auditory"> Listening to music</label><br>
-            <label><input type="radio" name="q11" value="interpersonal"> Studying with friends</label><br>
-            <label><input type="radio" name="q11" value="independent"> Quiet environment</label>
+        <div class="question"><p>11. When do you find yourself more focused: [cite: 29]</p>
+            <label><input type="radio" name="q11" value="visual"> Reviewing through notes/lectures</label>
+            <label><input type="radio" name="q11" value="auditory"> Listening to music</label>
+            <label><input type="radio" name="q11" value="interpersonal"> Studying with friends</label>
+            <label><input type="radio" name="q11" value="independent"> In a quiet environment</label>
         </div>
-
-        <div class="question">
-            <p>14. You understand lessons better after:</p>
-            <label><input type="radio" name="q14" value="visual"> Reviewing visuals</label><br>
-            <label><input type="radio" name="q14" value="auditory"> Listening again</label><br>
-            <label><input type="radio" name="q14" value="interpersonal"> Group discussion</label><br>
+        <div class="question"><p>12. You remember information best by: [cite: 31]</p>
+            <label><input type="radio" name="q12" value="visual"> Seeing it written</label>
+            <label><input type="radio" name="q12" value="auditory"> Hearing it explained</label>
+            <label><input type="radio" name="q12" value="interpersonal"> Talking about it</label>
+            <label><input type="radio" name="q12" value="independent"> Studying it alone</label>
+        </div>
+        <div class="question"><p>13. You prefer working on projects: [cite: 33]</p>
+            <label><input type="radio" name="q13" value="visual"> With visuals and layouts</label>
+            <label><input type="radio" name="q13" value="auditory"> With discussions</label>
+            <label><input type="radio" name="q13" value="interpersonal"> With a group</label>
+            <label><input type="radio" name="q13" value="independent"> Independently</label>
+        </div>
+        <div class="question"><p>14. You understand lessons better after: [cite: 35]</p>
+            <label><input type="radio" name="q14" value="visual"> Reviewing visuals</label>
+            <label><input type="radio" name="q14" value="auditory"> Listening again</label>
+            <label><input type="radio" name="q14" value="interpersonal"> Group discussion</label>
             <label><input type="radio" name="q14" value="independent"> Self-review</label>
         </div>
-
-        <div class="question">
-            <p>15. You learn best when:</p>
-            <label><input type="radio" name="q15" value="visual"> Watching demonstrations</label><br>
-            <label><input type="radio" name="q15" value="auditory"> Listening carefully</label><br>
-            <label><input type="radio" name="q15" value="interpersonal"> Sharing ideas</label><br>
+        <div class="question"><p>15. You learn best when: [cite: 37]</p>
+            <label><input type="radio" name="q15" value="visual"> Watching demonstrations</label>
+            <label><input type="radio" name="q15" value="auditory"> Listening carefully</label>
+            <label><input type="radio" name="q15" value="interpersonal"> Sharing ideas</label>
             <label><input type="radio" name="q15" value="independent"> Exploring alone</label>
         </div>
-
-        <div class="question">
-            <p>16. You feel confident learning when:</p>
-            <label><input type="radio" name="q16" value="visual"> You see examples</label><br>
-            <label><input type="radio" name="q16" value="auditory"> You hear guidance</label><br>
-            <label><input type="radio" name="q16" value="interpersonal"> You work with others</label><br>
+        <div class="question"><p>16. You feel confident learning when: [cite: 38]</p>
+            <label><input type="radio" name="q16" value="visual"> You see examples</label>
+            <label><input type="radio" name="q16" value="auditory"> You hear guidance</label>
+            <label><input type="radio" name="q16" value="interpersonal"> You work with others</label>
             <label><input type="radio" name="q16" value="independent"> You work alone</label>
         </div>
 
@@ -68,9 +127,9 @@ function calculateResult() {
     let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
     const answers = document.querySelectorAll('input[type="radio"]:checked');
 
-    // FIXED: Now checks for all 16 answers instead of just 10
+    // Requirement: User must answer ALL 16 questions
     if (answers.length < 16) {
-        alert("Please answer all 16 questions before submitting.");
+        alert("Please answer all 16 questions.");
         return;
     }
 
@@ -78,10 +137,10 @@ function calculateResult() {
 
     const maxScore = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
     let dominantStyles = [];
-    if (scores.visual === maxScore) dominantStyles.push("Visual Learner 📊");
-    if (scores.auditory === maxScore) dominantStyles.push("Auditory Learner 🎧");
-    if (scores.interpersonal === maxScore) dominantStyles.push("Interpersonal Learner 🤝");
-    if (scores.independent === maxScore) dominantStyles.push("Independent Learner 📚");
+    if (scores.visual === maxScore) dominantStyles.push("Visual Learner 📊 [cite: 43]");
+    if (scores.auditory === maxScore) dominantStyles.push("Auditory Learner 🎧 [cite: 43]");
+    if (scores.interpersonal === maxScore) dominantStyles.push("Interpersonal Learner 🤝 [cite: 44]");
+    if (scores.independent === maxScore) dominantStyles.push("Independent Learner 📚 [cite: 44]");
 
     const resultBox = document.getElementById("result");
     resultBox.style.display = "block";
@@ -90,3 +149,4 @@ function calculateResult() {
 </script>
 </body>
 </html>
+
