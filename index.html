@@ -7,49 +7,52 @@
 <style>
     /* ---------- CSS VARIABLES & THEMES ---------- */
     :root {
-        --bg: #ffffff; --text: #000000; --muted: #333333; --accent: #D99EC9;
-        --card: #f5f5f5; --shadow: rgba(0,0,0,0.2); 
+        --bg-gradient: radial-gradient(ellipse at center, #f6d5f7 0%, #D99EC9 100%);
+        --text: #000000; --muted: #333333; --accent: #D99EC9;
+        --card: rgba(255, 255, 255, 0.9); --shadow: rgba(0,0,0,0.2); 
     }
     body.dark {
-        --bg: #121212; --text: #f1f1f1; --muted: #bbbbbb; --accent: #f6d5f7;
-        --card: #1f1f1f; --shadow: rgba(0,0,0,0.6);
+        --bg-gradient: radial-gradient(ellipse at center, #434343 0%, #000000 100%);
+        --text: #f1f1f1; --muted: #bbbbbb; --accent: #f6d5f7;
+        --card: rgba(31, 31, 31, 0.9); --shadow: rgba(0,0,0,0.6);
     }
 
     /* ---------- GLOBAL ---------- */
     * { box-sizing: border-box; font-family: Arial, sans-serif; transition: 0.3s; }
-    body { margin: 0; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+    
+    body { 
+        margin: 0; 
+        background: var(--bg-gradient); 
+        background-attachment: fixed; 
+        color: var(--text); 
+        overflow-x: hidden; 
+        min-height: 100vh;
+    }
 
-    /* ---------- HEADER ---------- */
     header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
     .logo { font-weight: bold; font-size: 20px; }
     nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size: 14px; }
     .toggle { cursor: pointer; font-size: 20px; margin-left: 20px; }
 
-    /* ---------- LANDING INTERFACE ---------- */
-    .container { display: flex; padding: 40px; gap: 30px; align-items: center; }
-    .left { width: 45%; }
-    .left h1 { font-size: 42px; margin-bottom: 20px; }
+    .container { display: flex; padding: 40px; gap: 30px; align-items: center; min-height: 80vh; }
+    .left { width: 45%; background: var(--card); padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px var(--shadow); }
+    .left h1 { font-size: 42px; margin-bottom: 20px; color: #333; }
     .left p { color: var(--muted); line-height: 1.6; }
+    
     .right { width: 55%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
     .right img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; box-shadow: 0 6px 15px var(--shadow); }
     .wide { grid-column: span 2; } .tall { grid-row: span 2; height: 335px; }
 
-    /* ---------- BUTTONS ---------- */
     .proceed { 
-        display: inline-block; margin-top: 30px; font-weight: bold; color: var(--text); 
-        text-decoration: none; border: none; border-bottom: 2px solid var(--text); 
-        padding-bottom: 4px; background: none; cursor: pointer; font-size: 16px;
+        display: inline-block; margin-top: 30px; font-weight: bold; color: #333; 
+        text-decoration: none; border: 2px solid #333; 
+        padding: 12px 25px; border-radius: 50px; background: white; cursor: pointer; font-size: 16px;
     }
-    .proceed:hover { color: var(--accent); border-color: var(--accent); letter-spacing: 1px; }
+    .proceed:hover { background: #D99EC9; color: white; border-color: #D99EC9; transform: scale(1.05); }
 
-    /* ---------- DIAMOND GRADIENT OVERLAYS ---------- */
-    .form-overlay {
-        display: none; 
-        background: radial-gradient(circle farthest-side at center, #f6d5f7 0%, #D99EC9 100%);
-        min-height: 100vh; padding: 40px 20px; text-align: center; color: white;
-    }
+    .section-overlay { display: none; padding: 40px 20px; text-align: center; }
     .quiz-card {
-        background: white; color: #333; max-width: 650px; margin: auto;
+        background: var(--card); color: #333; max-width: 650px; margin: auto;
         padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     .input-group { margin: 15px 0; text-align: left; }
@@ -91,31 +94,31 @@
     </div>
 </div>
 
-<div id="section-register" class="form-overlay">
+<div id="section-register" class="section-overlay">
     <div class="quiz-card">
         <h2 style="color:#D99EC9">Student Profile</h2>
         <div class="input-group">
             <label>Full Name (Optional)</label>
-            <input type="text" id="userName" placeholder="Your name (optional)">
+            <input type="text" id="userName" placeholder="Leave blank for anonymous">
         </div>
         <div class="input-group">
-            <label>Age</label>
+            <label>Age (Required)</label>
             <input type="number" id="userAge" value="18">
         </div>
         <div class="input-group">
-            <label>Gender (Optional)</label>
+            <label>Gender (Required)</label>
             <select id="userGender">
-                <option value="">Select Gender</option>
+                <option value="">-- Please Select --</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
         </div>
-        <button class="proceed" style="border:1px solid #D99EC9; padding: 10px 20px; border-radius: 50px;" onclick="startSurvey()">START THE TEST</button>
+        <button class="proceed" onclick="startSurvey()">START THE TEST</button>
     </div>
 </div>
 
-<div id="section-survey" class="form-overlay">
+<div id="section-survey" class="section-overlay">
     <div class="quiz-card">
         <h2 id="welcomeHeader" style="color:#D99EC9">Questionnaire</h2>
         <form id="quizForm">
@@ -216,22 +219,20 @@
                 <label><input type="radio" name="q16" value="independent"> You work alone</label>
             </div>
 
-            <button type="button" class="proceed" style="background:#D99EC9; color:white; border:none; padding:15px; width:100%; border-radius:50px; margin-top:40px;" onclick="calculateResult()">FINISH TEST</button>
+            <button type="button" class="proceed" style="background:#D99EC9; color:white; border:none; width:100%; margin-top:40px;" onclick="calculateResult()">FINISH TEST</button>
         </form>
         <div id="result" style="display:none; margin-top:25px; padding:20px; background:#fff5f7; border:2px solid #D99EC9; border-radius:15px; font-weight:bold; color:#333;"></div>
-        <button id="restartBtn" class="proceed" style="display:none; margin-top:20px; border-radius:50px; border:1px solid #333;" onclick="location.reload()">RESTART TEST</button>
+        <button id="restartBtn" class="proceed" style="display:none; margin-top:20px;" onclick="location.reload()">RESTART TEST</button>
     </div>
 </div>
 
 <script>
-    // THEME TOGGLE
     const toggle = document.getElementById("themeToggle");
     toggle.onclick = () => {
         document.body.classList.toggle("dark");
         toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
     };
 
-    // NAVIGATION
     function goToRegistration() {
         document.getElementById('section-interface').style.display = 'none';
         document.getElementById('section-register').style.display = 'block';
@@ -239,25 +240,32 @@
 
     function startSurvey() {
         const nameInput = document.getElementById('userName').value;
+        const ageInput = document.getElementById('userAge').value;
+        const genderInput = document.getElementById('userGender').value;
+
+        // Validation Logic
+        if (!ageInput || !genderInput) {
+            alert("Please provide your Age and Gender to proceed!");
+            return;
+        }
+
         document.getElementById('section-register').style.display = 'none';
         document.getElementById('section-survey').style.display = 'block';
         document.getElementById('welcomeHeader').textContent = nameInput ? "Welcome, " + nameInput + "!" : "Welcome!";
         window.scrollTo(0,0);
     }
 
-    // CALCULATION
     function calculateResult() {
         let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
         const answers = document.querySelectorAll('input[type="radio"]:checked');
 
         if (answers.length < 16) {
-            alert("Oops! You missed " + (16 - answers.length) + " questions. Please finish all 16!");
+            alert("Please answer all 16 questions to see your result!");
             return;
         }
 
         answers.forEach(a => { scores[a.value]++; });
         const max = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
-        
         let styles = [];
         if (scores.visual === max) styles.push("Visual Learner 📊");
         if (scores.auditory === max) styles.push("Auditory Learner 🎧");
