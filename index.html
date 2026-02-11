@@ -7,11 +7,11 @@
 <style>
     /* ---------- CSS VARIABLES & THEMES ---------- */
     :root {
-        --bg: #ffffff; --text: #000000; --muted: #333333; --accent: #e63946;
-        --card: #f5f5f5; --shadow: rgba(0,0,0,0.2); --purple: #764ba2;
+        --bg: #ffffff; --text: #000000; --muted: #333333; --accent: #D99EC9;
+        --card: #f5f5f5; --shadow: rgba(0,0,0,0.2); 
     }
     body.dark {
-        --bg: #121212; --text: #f1f1f1; --muted: #bbbbbb; --accent: #ff6b6b;
+        --bg: #121212; --text: #f1f1f1; --muted: #bbbbbb; --accent: #f6d5f7;
         --card: #1f1f1f; --shadow: rgba(0,0,0,0.6);
     }
 
@@ -42,9 +42,10 @@
     }
     .proceed:hover { color: var(--accent); border-color: var(--accent); letter-spacing: 1px; }
 
-    /* ---------- FORM & SURVEY OVERLAYS ---------- */
+    /* ---------- DIAMOND GRADIENT OVERLAYS ---------- */
     .form-overlay {
-        display: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: none; 
+        background: radial-gradient(circle farthest-side at center, #f6d5f7 0%, #D99EC9 100%);
         min-height: 100vh; padding: 40px 20px; text-align: center; color: white;
     }
     .quiz-card {
@@ -58,9 +59,8 @@
     .question { text-align: left; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
     .question p { font-weight: bold; margin-bottom: 10px; }
     .question label { display: block; margin: 8px 0; cursor: pointer; padding: 5px; border-radius: 5px; }
-    .question label:hover { background-color: #f0f0f0; }
+    .question label:hover { background-color: #fce7f3; }
 
-    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 900px) { .container { flex-direction: column; } .left, .right { width: 100%; } }
 </style>
 </head>
@@ -78,7 +78,7 @@
     <div class="container">
         <div class="left">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
-            <p>LEARNSTYLE+.COM IS A WEBSITE INDICATOR WHEREIN YOU CAN IDENTIFY YOUR LEARNING STYLE THROUGH 16 QUESTIONS ABOUT VISUAL, AUDITORY, INTERPERSONAL, AND INDEPENDENT LEARNING.</p>
+            <p>IDENTIFY YOUR LEARNING STYLE THROUGH 16 QUESTIONS ABOUT VISUAL, AUDITORY, INTERPERSONAL, AND INDEPENDENT LEARNING.</p>
             <button class="proceed" onclick="goToRegistration()">CLICK HERE TO PROCEED</button>
         </div>
         <div class="right">
@@ -93,30 +93,31 @@
 
 <div id="section-register" class="form-overlay">
     <div class="quiz-card">
-        <h2 style="color:var(--purple)">Student Profile</h2>
+        <h2 style="color:#D99EC9">Student Profile</h2>
         <div class="input-group">
             <label>Full Name (Optional)</label>
-            <input type="text" id="userName" placeholder="Your name or nickname">
+            <input type="text" id="userName" placeholder="Your name (optional)">
         </div>
         <div class="input-group">
             <label>Age</label>
-            <input type="number" id="userAge" placeholder="17">
+            <input type="number" id="userAge" value="18">
         </div>
         <div class="input-group">
-            <label>Gender</label>
+            <label>Gender (Optional)</label>
             <select id="userGender">
+                <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
         </div>
-        <button class="proceed" style="border:1px solid var(--purple); padding: 10px 20px; border-radius: 50px;" onclick="startSurvey()">START THE TEST</button>
+        <button class="proceed" style="border:1px solid #D99EC9; padding: 10px 20px; border-radius: 50px;" onclick="startSurvey()">START THE TEST</button>
     </div>
 </div>
 
 <div id="section-survey" class="form-overlay">
     <div class="quiz-card">
-        <h2 id="welcomeHeader" style="color:var(--purple)">Questionnaire</h2>
+        <h2 id="welcomeHeader" style="color:#D99EC9">Questionnaire</h2>
         <form id="quizForm">
             <div class="question"><p>1. How do you learn best?</p>
                 <label><input type="radio" name="q1" value="visual" required> By seeing diagrams and images</label>
@@ -215,21 +216,22 @@
                 <label><input type="radio" name="q16" value="independent"> You work alone</label>
             </div>
 
-            <button type="button" class="proceed" style="background:var(--purple); color:white; border:none; padding:15px; width:100%; border-radius:50px; margin-top:40px;" onclick="calculateResult()">FINISH TEST</button>
+            <button type="button" class="proceed" style="background:#D99EC9; color:white; border:none; padding:15px; width:100%; border-radius:50px; margin-top:40px;" onclick="calculateResult()">FINISH TEST</button>
         </form>
-        <div id="result" style="display:none; margin-top:25px; padding:20px; background:#f0fdf4; border:2px solid #22c55e; border-radius:15px; font-weight:bold;"></div>
+        <div id="result" style="display:none; margin-top:25px; padding:20px; background:#fff5f7; border:2px solid #D99EC9; border-radius:15px; font-weight:bold; color:#333;"></div>
+        <button id="restartBtn" class="proceed" style="display:none; margin-top:20px; border-radius:50px; border:1px solid #333;" onclick="location.reload()">RESTART TEST</button>
     </div>
 </div>
 
 <script>
-    // THEME TOGGLE LOGIC
+    // THEME TOGGLE
     const toggle = document.getElementById("themeToggle");
     toggle.onclick = () => {
         document.body.classList.toggle("dark");
         toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
     };
 
-    // NAVIGATION LOGIC
+    // NAVIGATION
     function goToRegistration() {
         document.getElementById('section-interface').style.display = 'none';
         document.getElementById('section-register').style.display = 'block';
@@ -243,13 +245,13 @@
         window.scrollTo(0,0);
     }
 
-    // SCORING LOGIC
+    // CALCULATION
     function calculateResult() {
         let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
         const answers = document.querySelectorAll('input[type="radio"]:checked');
 
         if (answers.length < 16) {
-            alert("Oops! You missed " + (16 - answers.length) + " questions. Please answer all 16!");
+            alert("Oops! You missed " + (16 - answers.length) + " questions. Please finish all 16!");
             return;
         }
 
@@ -264,13 +266,10 @@
 
         const resDiv = document.getElementById('result');
         resDiv.style.display = 'block';
-        resDiv.innerHTML = "BOOM! 🚀<br><br>Your dominant style is: " + styles.join(" & ");
+        resDiv.innerHTML = "RESULT: " + styles.join(" & ");
+        document.getElementById('restartBtn').style.display = 'inline-block';
         resDiv.scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 </body>
 </html>
-</body>
-</html>
-
-
