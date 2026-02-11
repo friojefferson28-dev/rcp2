@@ -3,68 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LearnStyle+</title>
+<title>LearnStyle+ | Discover Your Style</title>
 <style>
-    /* ---------- CSS VARIABLES & THEMES ---------- */
+    /* ---------- DIAMOND ARGYLE PATTERN BACKGROUND ---------- */
     :root {
-        --bg-gradient: radial-gradient(ellipse at center, #f6d5f7 0%, #D99EC9 100%);
-        --text: #000000; --muted: #333333; --accent: #D99EC9;
-        --card: rgba(255, 255, 255, 0.9); --shadow: rgba(0,0,0,0.2); 
-    }
-    body.dark {
-        --bg-gradient: radial-gradient(ellipse at center, #434343 0%, #000000 100%);
-        --text: #f1f1f1; --muted: #bbbbbb; --accent: #f6d5f7;
-        --card: rgba(31, 31, 31, 0.9); --shadow: rgba(0,0,0,0.6);
+        --color1: #D99EC9;
+        --color2: #c88bb7; 
+        --text: #000000;
+        --card: rgba(255, 255, 255, 0.95);
     }
 
-    /* ---------- GLOBAL ---------- */
-    * { box-sizing: border-box; font-family: Arial, sans-serif; transition: 0.3s; }
+    body {
+        margin: 0;
+        padding: 0;
+        color: var(--text);
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-color: var(--color1);
+        /* CSS ARGYLE DIAMOND PATTERN */
+        background-image: 
+            linear-gradient(135deg, var(--color2) 25%, transparent 25%), 
+            linear-gradient(225deg, var(--color2) 25%, transparent 25%), 
+            linear-gradient(45deg, var(--color2) 25%, transparent 25%), 
+            linear-gradient(315deg, var(--color2) 25%, transparent 25%);
+        background-position: 40px 0, 40px 0, 0 0, 0 0;
+        background-size: 80px 80px;
+        background-repeat: repeat;
+        background-attachment: fixed;
+    }
+
+    /* ---------- LANDING PAGE LAYOUT ---------- */
+    header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 20px 40px; 
+    }
+    .logo { font-weight: bold; font-size: 24px; letter-spacing: 1px; }
     
-    body { 
-        margin: 0; 
-        background: var(--bg-gradient); 
-        background-attachment: fixed; 
-        color: var(--text); 
-        overflow-x: hidden; 
-        min-height: 100vh;
+    .container { 
+        display: flex; 
+        padding: 60px 40px; 
+        gap: 40px; 
+        align-items: center; 
+        min-height: 85vh; 
+    }
+    
+    .left { 
+        width: 50%; 
+        background: var(--card); 
+        padding: 60px 50px; 
+        border-radius: 40px; 
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+    }
+    .left h1 { font-size: 60px; margin: 0 0 20px 0; line-height: 1.1; font-weight: 800; }
+    .left p { 
+        font-size: 16px; 
+        color: #444; 
+        line-height: 1.5; 
+        text-transform: uppercase; 
+        margin-bottom: 40px; 
+        letter-spacing: 0.5px;
     }
 
-    header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
-    .logo { font-weight: bold; font-size: 20px; }
-    nav a { margin-left: 30px; text-decoration: none; color: var(--text); font-size: 14px; }
-    .toggle { cursor: pointer; font-size: 20px; margin-left: 20px; }
+    .right { width: 50%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .right img { 
+        width: 100%; 
+        height: 220px; 
+        object-fit: cover; 
+        border-radius: 20px; 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+    }
+    .tall { grid-row: span 2; height: 460px !important; }
 
-    .container { display: flex; padding: 40px; gap: 30px; align-items: center; min-height: 80vh; }
-    .left { width: 45%; background: var(--card); padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px var(--shadow); }
-    .left h1 { font-size: 42px; margin-bottom: 20px; color: #333; }
-    .left p { color: var(--muted); line-height: 1.6; }
-    
-    .right { width: 55%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .right img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; box-shadow: 0 6px 15px var(--shadow); }
-    .wide { grid-column: span 2; } .tall { grid-row: span 2; height: 335px; }
-
+    /* ---------- BUTTONS ---------- */
     .proceed { 
-        display: inline-block; margin-top: 30px; font-weight: bold; color: #333; 
-        text-decoration: none; border: 2px solid #333; 
-        padding: 12px 25px; border-radius: 50px; background: white; cursor: pointer; font-size: 16px;
+        display: inline-block; 
+        font-weight: bold; 
+        color: #000; 
+        text-decoration: none; 
+        border: 3px solid #000; 
+        padding: 18px 45px; 
+        border-radius: 50px; 
+        background: transparent; 
+        cursor: pointer; 
+        font-size: 18px;
+        text-transform: uppercase;
+        transition: 0.3s ease;
     }
-    .proceed:hover { background: #D99EC9; color: white; border-color: #D99EC9; transform: scale(1.05); }
+    .proceed:hover { background: #000; color: #fff; transform: translateY(-3px); }
 
-    .section-overlay { display: none; padding: 40px 20px; text-align: center; }
+    /* ---------- SECTIONS & FORMS ---------- */
+    .section-overlay { display: none; padding: 60px 20px; text-align: center; }
     .quiz-card {
-        background: var(--card); color: #333; max-width: 650px; margin: auto;
-        padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        background: var(--card); 
+        color: #333; 
+        max-width: 750px; 
+        margin: auto;
+        padding: 50px; 
+        border-radius: 40px; 
+        box-shadow: 0 25px 60px rgba(0,0,0,0.2);
     }
-    .input-group { margin: 15px 0; text-align: left; }
-    .input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-    .input-group input, .input-group select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+    .input-group { margin: 25px 0; text-align: left; }
+    .input-group label { display: block; margin-bottom: 10px; font-weight: bold; font-size: 18px; }
+    .input-group input, .input-group select { 
+        width: 100%; 
+        padding: 15px; 
+        border-radius: 12px; 
+        border: 2px solid #ddd; 
+        font-size: 16px;
+    }
     
-    .question { text-align: left; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-    .question p { font-weight: bold; margin-bottom: 10px; }
-    .question label { display: block; margin: 8px 0; cursor: pointer; padding: 5px; border-radius: 5px; }
-    .question label:hover { background-color: #fce7f3; }
+    .question { 
+        text-align: left; 
+        margin-top: 35px; 
+        border-bottom: 1px solid #eee; 
+        padding-bottom: 25px; 
+    }
+    .question p { font-weight: bold; font-size: 20px; margin-bottom: 15px; }
+    .question label { 
+        display: block; 
+        margin: 12px 0; 
+        cursor: pointer; 
+        padding: 12px; 
+        border-radius: 10px; 
+        border: 1px solid #f0f0f0; 
+        transition: 0.2s;
+    }
+    .question label:hover { background: #fdf2f8; border-color: #D99EC9; }
 
-    @media (max-width: 900px) { .container { flex-direction: column; } .left, .right { width: 100%; } }
+    @media (max-width: 1100px) { 
+        .container { flex-direction: column; text-align: center; } 
+        .left, .right { width: 100%; }
+        .left h1 { font-size: 40px; }
+    }
 </style>
 </head>
 <body>
@@ -72,34 +143,28 @@
 <div id="section-interface">
     <header>
         <div class="logo">LEARNSTYLE+.COM</div>
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="#">ABOUT US</a>
-            <span class="toggle" id="themeToggle">🌙</span>
-        </nav>
     </header>
     <div class="container">
         <div class="left">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
             <p>IDENTIFY YOUR LEARNING STYLE THROUGH 16 QUESTIONS ABOUT VISUAL, AUDITORY, INTERPERSONAL, AND INDEPENDENT LEARNING.</p>
-            <button class="proceed" onclick="goToRegistration()">CLICK HERE TO PROCEED</button>
+            <button class="proceed" onclick="goToRegistration()">Click Here To Proceed</button>
         </div>
         <div class="right">
-            <img src="image1.jpg">
-            <img src="image2.jpg">
-            <img src="image3.jpg" class="tall">
-            <img src="image4.jpg" class="wide">
-            <img src="image5.jpg">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400" alt="Students">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400" alt="Writing">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400" class="tall" alt="Group Study">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400" alt="Computer">
         </div>
     </div>
 </div>
 
 <div id="section-register" class="section-overlay">
     <div class="quiz-card">
-        <h2 style="color:#D99EC9">Student Profile</h2>
+        <h2 style="font-size: 36px; color:#D99EC9; margin-bottom: 30px;">Student Profile</h2>
         <div class="input-group">
             <label>Full Name (Optional)</label>
-            <input type="text" id="userName" placeholder="Leave blank for anonymous">
+            <input type="text" id="userName" placeholder="Enter name or leave blank">
         </div>
         <div class="input-group">
             <label>Age (Required)</label>
@@ -108,19 +173,19 @@
         <div class="input-group">
             <label>Gender (Required)</label>
             <select id="userGender">
-                <option value="">-- Please Select --</option>
+                <option value="">-- Select Your Gender --</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
         </div>
-        <button class="proceed" onclick="startSurvey()">START THE TEST</button>
+        <button class="proceed" onclick="startSurvey()">Start Discovery</button>
     </div>
 </div>
 
 <div id="section-survey" class="section-overlay">
     <div class="quiz-card">
-        <h2 id="welcomeHeader" style="color:#D99EC9">Questionnaire</h2>
+        <h2 id="welcomeHeader" style="color:#D99EC9; font-size: 32px;">Questionnaire</h2>
         <form id="quizForm">
             <div class="question"><p>1. How do you learn best?</p>
                 <label><input type="radio" name="q1" value="visual" required> By seeing diagrams and images</label>
@@ -219,53 +284,52 @@
                 <label><input type="radio" name="q16" value="independent"> You work alone</label>
             </div>
 
-            <button type="button" class="proceed" style="background:#D99EC9; color:white; border:none; width:100%; margin-top:40px;" onclick="calculateResult()">FINISH TEST</button>
+            <button type="button" class="proceed" style="width:100%; margin-top:50px; background:#D99EC9; color:white; border:none;" onclick="calculateResult()">Finish Test</button>
         </form>
-        <div id="result" style="display:none; margin-top:25px; padding:20px; background:#fff5f7; border:2px solid #D99EC9; border-radius:15px; font-weight:bold; color:#333;"></div>
-        <button id="restartBtn" class="proceed" style="display:none; margin-top:20px;" onclick="location.reload()">RESTART TEST</button>
+        
+        <div id="result" style="display:none; margin-top:30px; padding:30px; background:#fff5f7; border:3px solid #D99EC9; border-radius:25px; font-weight:bold; font-size:26px; line-height: 1.4;"></div>
+        <button id="restartBtn" class="proceed" style="display:none; margin-top:25px;" onclick="location.reload()">Take it again</button>
     </div>
 </div>
 
 <script>
-    const toggle = document.getElementById("themeToggle");
-    toggle.onclick = () => {
-        document.body.classList.toggle("dark");
-        toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-    };
-
+    // Navigation Functions
     function goToRegistration() {
         document.getElementById('section-interface').style.display = 'none';
         document.getElementById('section-register').style.display = 'block';
+        window.scrollTo(0,0);
     }
 
     function startSurvey() {
-        const nameInput = document.getElementById('userName').value;
-        const ageInput = document.getElementById('userAge').value;
-        const genderInput = document.getElementById('userGender').value;
+        const age = document.getElementById('userAge').value;
+        const gen = document.getElementById('userGender').value;
+        const name = document.getElementById('userName').value;
 
-        // Validation Logic
-        if (!ageInput || !genderInput) {
-            alert("Please provide your Age and Gender to proceed!");
+        // Mandatory Field Check
+        if (!age || !gen) {
+            alert("⚠️ Please enter your Age and select a Gender to continue.");
             return;
         }
 
         document.getElementById('section-register').style.display = 'none';
         document.getElementById('section-survey').style.display = 'block';
-        document.getElementById('welcomeHeader').textContent = nameInput ? "Welcome, " + nameInput + "!" : "Welcome!";
+        document.getElementById('welcomeHeader').textContent = name ? "Hello, " + name + "!" : "Hello there!";
         window.scrollTo(0,0);
     }
 
+    // Result Logic
     function calculateResult() {
         let scores = { visual: 0, auditory: 0, interpersonal: 0, independent: 0 };
         const answers = document.querySelectorAll('input[type="radio"]:checked');
 
         if (answers.length < 16) {
-            alert("Please answer all 16 questions to see your result!");
+            alert("You've only answered " + answers.length + "/16 questions. Please finish all of them!");
             return;
         }
 
         answers.forEach(a => { scores[a.value]++; });
         const max = Math.max(scores.visual, scores.auditory, scores.interpersonal, scores.independent);
+        
         let styles = [];
         if (scores.visual === max) styles.push("Visual Learner 📊");
         if (scores.auditory === max) styles.push("Auditory Learner 🎧");
@@ -274,7 +338,7 @@
 
         const resDiv = document.getElementById('result');
         resDiv.style.display = 'block';
-        resDiv.innerHTML = "RESULT: " + styles.join(" & ");
+        resDiv.innerHTML = "BOOM! 🚀<br>Your Learning Style is: <span style='color:#D99EC9'>" + styles.join(" & ") + "</span>";
         document.getElementById('restartBtn').style.display = 'inline-block';
         resDiv.scrollIntoView({ behavior: 'smooth' });
     }
