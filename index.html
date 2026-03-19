@@ -102,7 +102,7 @@
         /* ---------- TEAM SECTION ---------- */
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; text-align: left; }
         .team-member { padding: 10px; border-left: 4px solid var(--accent-pink); background: var(--bg-color); }
-        .role { font-size: 11px; color: var(--accent-pink); display: block; }
+        .role { font-size: 11px; color: var(--accent-pink); display: block; font-weight: 800; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -130,7 +130,7 @@
     <div class="hero-wrapper">
         <div class="hero-text">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
-            <p>A website indicator developed by EAC students to help you identify how you study best through 25 research-backed questions.</p>
+            <p>LEARNSTYLE+.COM IS A WEBSITE INDICATOR WHEREIN YOU CAN IDENTIFY YOUR LEARNING STYLE THROUGH 25 RESEARCH QUESTIONS.</p>
             <div class="admin-btn" style="display:inline-block;" onclick="nav('pg2')">PROCEED TO SURVEY</div>
         </div>
         <div class="hero-images">
@@ -145,20 +145,28 @@
 
 <div id="aboutPage" class="section">
     <div class="survey-card">
-        <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px;">ABOUT US</h2>
-        <p style="font-family: Arial; font-weight: 500; line-height: 1.6;">LearnStyle+.com is an initiative by 12 STEM 6 students of Emilio Aguinaldo College-Manila. This project aims to validate the effectiveness of digital indicators in identifying cognitive learning styles.</p>
+        <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px; text-transform: uppercase;">About Us</h2>
         
-        <h3 style="margin-top:40px; text-transform: uppercase;">Our Research Team</h3>
+        <div style="font-family: Arial; font-weight: 500; line-height: 1.8; color: var(--text-color);">
+            <p>LearnStyle+.com is a website that can identify your learning style by answering 25 questions. It will also recommend best ways to assess your results!</p>
+            
+            <p>LearnStyle+.com is made by the students of <b>Emilio Aguinaldo College-Manila, 12 STEM 6, Group Technology 1</b>. It aims to see the validity of this website in identifying students'— specifically from Emilio Aguinaldo College-Manila— Cognitive Learning Style.</p>
+        </div>
+        
+        <hr style="margin: 40px 0; border: 0; border-top: 2px dashed var(--pattern-color);">
+
+        <h3 style="text-transform: uppercase; margin-bottom: 20px;">Our Research Team</h3>
         <div class="team-grid">
-            <div class="team-member"><span class="role">Project Leader</span>Rain Grande</div>
+            <div class="team-member"><span class="role">Project Leader</span>Jairus Bautista</div>
+            <div class="team-member"><span class="role">Designer Researcher</span>Lordie Granada</div>
             <div class="team-member"><span class="role">Lead Developer</span>Jan Jefferson Frio</div>
-            <div class="team-member"><span class="role">Designer & Researcher</span>Lordie Granada</div>
             <div class="team-member"><span class="role">Researcher</span>Samuel Calixtro</div>
             <div class="team-member"><span class="role">Researcher</span>Christian Calma</div>
             <div class="team-member"><span class="role">Researcher</span>Gian Serrano</div>
-            <div class="team-member"><span class="role">Researcher</span>Jairus Bautista</div>
+            <div class="team-member"><span class="role">Researcher</span>Rain Grande</div>
         </div>
-        <button class="admin-btn" onclick="nav('pg1')">BACK TO HOME</button>
+        
+        <button class="admin-btn" onclick="nav('pg1')" style="margin-top: 40px; width: 100%;">BACK TO HOME</button>
     </div>
 </div>
 
@@ -167,11 +175,11 @@
         <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px;">STUDENT PROFILE</h2>
         <div style="margin-top: 20px;">
             <label>FULL NAME (OPTIONAL)</label>
-            <input type="text" id="stuName" style="width:100%; padding:15px; margin:10px 0 20px; border:2px solid black; box-sizing: border-box;">
+            <input type="text" id="stuName" style="width:100%; padding:15px; margin:10px 0 20px; border:3px solid black; box-sizing: border-box;">
             <label>AGE *</label>
-            <input type="number" id="stuAge" value="17" style="width:100%; padding:15px; margin:10px 0 20px; border:2px solid black; box-sizing: border-box;">
+            <input type="number" id="stuAge" value="17" style="width:100%; padding:15px; margin:10px 0 20px; border:3px solid black; box-sizing: border-box;">
             <label>GENDER *</label>
-            <select id="stuGender" style="width:100%; padding:15px; margin:10px 0 30px; border:2px solid black; box-sizing: border-box;">
+            <select id="stuGender" style="width:100%; padding:15px; margin:10px 0 30px; border:3px solid black; box-sizing: border-box;">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
@@ -190,7 +198,7 @@
         </form>
         <div id="resBox" style="display:none; margin-top: 40px; border: 5px solid var(--accent-pink); padding: 30px; text-align: center;">
             <h2 id="resTitle"></h2>
-            <p>Your data has been successfully securely recorded for the EAC Research Contest.</p>
+            <p id="resDesc">Your data has been successfully recorded for the EAC Research Contest.</p>
             <button onclick="location.reload()" class="admin-btn">RETAKE</button>
         </div>
     </div>
