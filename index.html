@@ -158,8 +158,8 @@
         <h3 style="text-transform: uppercase; margin-bottom: 20px;">Our Research Team</h3>
         <div class="team-grid">
             <div class="team-member"><span class="role">Project Leader</span>Jairus Bautista</div>
-            <div class="team-member"><span class="role">Designer Researcher</span>Lordie Granada</div>
             <div class="team-member"><span class="role">Lead Developer</span>Jan Jefferson Frio</div>
+            <div class="team-member"><span class="role">Designer Researcher</span>Lordie Granada</div>
             <div class="team-member"><span class="role">Researcher</span>Samuel Calixtro</div>
             <div class="team-member"><span class="role">Researcher</span>Christian Calma</div>
             <div class="team-member"><span class="role">Researcher</span>Gian Serrano</div>
@@ -198,14 +198,16 @@
         </form>
         <div id="resBox" style="display:none; margin-top: 40px; border: 5px solid var(--accent-pink); padding: 30px; text-align: center;">
             <h2 id="resTitle"></h2>
-            <p id="resDesc">Your data has been successfully recorded for the EAC Research Contest.</p>
+            <div id="recommendationArea" style="text-align: left; margin: 20px 0; font-family: Arial; line-height: 1.6;"></div>
+            <p>Your data has been successfully recorded for the EAC Research Contest.</p>
             <button onclick="location.reload()" class="admin-btn">RETAKE</button>
         </div>
     </div>
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi85rE20-25eZ1S4Yy9wY9YvU9X7e9/exec"; 
+    // LINK FIXED USING YOUR SCREENSHOT
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1eYRVnkt3R8LXYqH3n0JVBVgg1hoga_Ym8BCHL-4S_A8q1_NbeYw1U6f0S3Q-TfU/exec"; 
 
     const questions = [
         { q: "When learning something new, do you prefer to:", v: "Watch a video or diagram", a: "Listen to a verbal explanation", p: "Discuss it with a partner", i: "Read about it on your own" },
@@ -277,6 +279,15 @@
 
         const top = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
         const resultLabel = top.toUpperCase() + " LEARNER";
+        
+        // Recommendations logic
+        const recs = {
+            visual: "<b>Recommendation:</b> Use mind maps, color-coded notes, and diagrams. Watching video tutorials and using highlighters will help you retain info better.",
+            auditory: "<b>Recommendation:</b> Read your notes out loud, record lectures to listen back, and participate in group discussions or verbal quizzes.",
+            interpersonal: "<b>Recommendation:</b> Join study groups, teach others what you've learned, and engage in brainstorming sessions with classmates.",
+            independent: "<b>Recommendation:</b> Find a quiet, private space to study. Use journals, self-paced online courses, and set personal goals to track progress."
+        };
+
         const btn = document.getElementById('finishBtn');
         btn.innerText = "SAVING TO DATABASE..."; btn.disabled = true;
 
@@ -289,9 +300,10 @@
             });
             document.getElementById('resBox').style.display = 'block';
             document.getElementById('resTitle').innerText = "YOUR STYLE: " + resultLabel;
+            document.getElementById('recommendationArea').innerHTML = recs[top];
             document.getElementById('resBox').scrollIntoView({behavior: 'smooth'});
             btn.style.display = 'none';
-        } catch (e) { alert("Error saving data."); btn.disabled = false; }
+        } catch (e) { alert("Error saving data. Make sure you deployed your script to 'Anyone'."); btn.disabled = false; }
     }
 </script>
 </body>
