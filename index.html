@@ -28,16 +28,13 @@
         
         .hero-wrapper { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; background: var(--card-bg); margin: 40px 80px; padding: 60px; border: 3px solid var(--text-color); box-shadow: 15px 15px 0px var(--text-color); }
         .hero-text h1 { font-size: 55px; margin: 0; line-height: 0.9; font-weight: 900; }
-        .pink-sq { color: var(--accent-pink); font-size: 40px; vertical-align: middle; margin-right: 10px; }
         
         .leader-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
         .img-item { width: 100%; object-fit: cover; border: 2px solid black; transition: 0.3s ease; }
-        .img-item:hover { transform: scale(1.05); box-shadow: 8px 8px 0px var(--accent-pink); z-index: 10; }
         .img-v { height: 220px; } .img-wide { grid-column: span 2; height: 180px; } .img-sq { height: 180px; }
 
         .section { display: none; }
         .section.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .survey-card { background: var(--card-bg); padding: 50px; border: 3px solid var(--text-color); max-width: 800px; margin: 40px auto; box-shadow: 12px 12px 0px var(--text-color); }
         .q-wrapper { border-bottom: 2px solid var(--pattern-color); padding: 25px 0; }
@@ -51,12 +48,8 @@
         .rec-table th, .rec-table td { border: 2px solid var(--text-color); padding: 12px; }
         .rec-table th { background: var(--pattern-color); text-transform: uppercase; font-size: 12px; }
 
-        .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .member-card { padding: 12px; border: 2px solid var(--text-color); background: var(--bg-color); }
-        .role { font-size: 10px; color: var(--accent-pink); font-weight: 800; text-transform: uppercase; display: block; }
-
         .progress-bar { position: fixed; top: 0; left: 0; height: 10px; background: var(--accent-pink); width: 0%; z-index: 3000; transition: 0.3s; }
-        @media print { .no-print { display: none !important; } .survey-card { border: none; box-shadow: none; margin: 0; padding: 0; width: 100% !important; } }
+        @media print { .no-print { display: none !important; } .survey-card { border: none; box-shadow: none; margin: 0; padding: 0; } }
     </style>
 </head>
 <body id="body">
@@ -66,7 +59,7 @@
 <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
         <h2>PRIVACY NOTICE</h2>
-        <p>LearnStyle+.com collects data for the 12 STEM 6 Research project at EAC-Manila. By proceeding, you consent to academic data recording.</p>
+        <p>LearnStyle+.com collects data for research at EAC-Manila. By proceeding, you consent to data recording.</p>
         <button class="btn" onclick="acceptPrivacy()">I AGREE & PROCEED</button>
         <button class="btn" style="background:#ccc; font-size:10px;" onclick="closeModal()">CANCEL</button>
     </div>
@@ -84,8 +77,8 @@
 <div id="pg1" class="section active">
     <div class="hero-wrapper">
         <div class="hero-text">
-            <h1><span class="pink-sq">■</span>LEARN YOUR<br>LEARNING STYLE!</h1>
-            <p style="text-transform: uppercase; font-size: 13px; margin: 25px 0; line-height: 1.5;">Identify your cognitive learning style through our 25-question indicator.</p>
+            <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
+            <p>Identify your cognitive learning style through our 25-question indicator.</p>
             <a href="#" onclick="openPrivacy()" style="color: var(--text-color); font-weight: 900; font-size: 18px; text-transform: uppercase; text-decoration: underline;">CLICK HERE TO PROCEED</a>
         </div>
         <div class="leader-grid">
@@ -98,38 +91,20 @@
     </div>
 </div>
 
-<div id="aboutPage" class="section">
-    <div class="survey-card">
-        <h2>ABOUT US</h2>
-        <p>LearnStyle+.com is a website that can identify your learning style by answering 25 questions. It will also recommend best ways to assess your results!</p>
-        <p>LearnStyle+.com is made by the students of <b>Emilio Aguinaldo College-Manila, 12 STEM 6, Group Technology 1</b>. It aims to see the validity of this website in identifying students'— specifically from Emilio Aguinaldo College-Manila— Cognitive Learning Style.</p>
-        
-        <h3>OUR TEAM</h3>
-        <div class="team-grid">
-            <div class="member-card"><span class="role">Lead Developer</span>Jan Jefferson Frio</div>
-            <div class="member-card"><span class="role">Project Leader</span>Jairus Bautista</div>
-            <div class="member-card"><span class="role">Designer / Researcher</span>Lordie Granada</div>
-            <div class="member-card"><span class="role">Researcher</span>Samuel Calixtro</div>
-            <div class="member-card"><span class="role">Researcher</span>Christian Calma</div>
-            <div class="member-card"><span class="role">Researcher</span>Gian Serrano</div>
-            <div class="member-card"><span class="role">Researcher</span>Rain Grande</div>
-        </div>
-        
-        <button class="btn" style="background:#444; font-size: 10px; width: auto; margin-top: 40px;" onclick="checkPassword()">ADMIN LOGIN</button>
-        <div id="adminPanel" style="display:none; margin-top:20px;">
-            <iframe src="https://docs.google.com/spreadsheets/d/1sp2W_PiUb_8nqUS_gMfkx6Gjal5cn9Xs/preview" style="width:100%; height:400px; border:2px solid black;"></iframe>
-        </div>
-    </div>
-</div>
-
 <div id="pg2" class="section">
     <div class="survey-card">
         <h2>STUDENT PROFILE</h2>
-        <label>FULL NAME</label><input type="text" id="stuName" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
-        <label>AGE</label><input type="number" id="stuAge" value="17" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
+        <label>FULL NAME (OPTIONAL)</label>
+        <input type="text" id="stuName" placeholder="Leave blank for Anonymous" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
+        
+        <label>AGE (17-20)</label>
+        <input type="number" id="stuAge" value="17" min="17" max="20" oninput="if(value>20)value=20;if(value<17)value=17" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
+        
         <label>GENDER</label>
         <select id="stuGender" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
-            <option>Male</option><option>Female</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
         </select>
         <button class="btn" onclick="nav('pg3')">START SURVEY</button>
     </div>
@@ -143,14 +118,11 @@
         </form>
         
         <div id="resBox" style="display:none; text-align: center;">
-            <p style="color: green; font-weight: 800; border: 2px solid green; padding: 10px;">SUCCESSFULLY RECORDED</p>
             <h1 id="resTitle" style="font-size: 32px; margin: 20px 0;"></h1>
-            
             <table class="rec-table">
-                <thead><tr><th>Style</th><th>Recommended Study Strategy</th></tr></thead>
+                <thead><tr><th>Style</th><th>Recommended Strategy</th></tr></thead>
                 <tbody id="tipBody"></tbody>
             </table>
-
             <button onclick="window.print()" class="btn" style="background:#3498db;">PRINT RESULT</button>
             <button onclick="location.reload()" class="btn">RETAKE SURVEY</button>
         </div>
@@ -158,12 +130,7 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1eYRVnkt3R8LXYqH3n0JVBVgg1hoga_Ym8BCHL-4S_A8q1_NbeYw1U6f0S3Q-TfU/exec";
-
-    function checkPassword() {
-        if (prompt("Enter Admin Password:") === "EAC2026") document.getElementById('adminPanel').style.display = "block";
-        else alert("Denied.");
-    }
+    const SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
 
     function openPrivacy() { document.getElementById('privacyModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('privacyModal').style.display = 'none'; }
@@ -233,28 +200,32 @@
         if(Array.from(data.keys()).length < 25) { alert("Please complete all questions!"); return; }
 
         const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
-        const maxScore = sorted[0][1];
-        const winners = sorted.filter(s => s[1] === maxScore).map(s => s[0].toUpperCase());
+        const winners = sorted.filter(s => s[1] === sorted[0][1]).map(s => s[0].toUpperCase());
         const resLabel = winners.join(" & ") + " LEARNER";
 
-        const tBody = document.getElementById('tipBody');
-        tBody.innerHTML = "";
-        winners.forEach(style => {
-            tBody.innerHTML += `<tr><td><strong>${style}</strong></td><td>${recommendations[style]}</td></tr>`;
-        });
+        let name = document.getElementById('stuName').value.trim() || "Anonymous";
+        let age = document.getElementById('stuAge').value;
+        let gender = document.getElementById('stuGender').value;
 
         document.getElementById('finishBtn').innerText = "RECORDING...";
 
         try {
             await fetch(SCRIPT_URL, { 
                 method:'POST', mode:'no-cors', 
-                body: `name=${encodeURIComponent(document.getElementById('stuName').value)}&result=${encodeURIComponent(resLabel)}`, 
+                body: `name=${encodeURIComponent(name)}&age=${age}&gender=${gender}&result=${encodeURIComponent(resLabel)}`, 
                 headers:{'Content-Type':'application/x-www-form-urlencoded'} 
             });
+
+            const tBody = document.getElementById('tipBody');
+            tBody.innerHTML = "";
+            winners.forEach(style => {
+                tBody.innerHTML += `<tr><td><strong>${style}</strong></td><td>${recommendations[style]}</td></tr>`;
+            });
+
             document.getElementById('resBox').style.display = 'block';
             document.getElementById('resTitle').innerText = resLabel;
             document.getElementById('styleForm').style.display = 'none';
-        } catch(e) { console.log("Done"); }
+        } catch(e) { alert("Error recording results."); }
     }
 </script>
 </body>
