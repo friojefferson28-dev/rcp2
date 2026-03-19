@@ -1,208 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LearnStyle+ | EAC STEM 6</title>
-<link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnStyle+ | EAC STEM 6</title>
+    <style>
+        :root {
+            --base-pink: #D99EC9;
+            --light-pink: #f6d5f7;
+            --bg-color: #fdf2f8; 
+            --text-color: #1a1a1a;
+            --accent-pink: #E91E63;
+            --card-bg: #ffffff;
+            --pattern-color: #f8bbd0;
+        }
 
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --light-pink: #2c2c2c;
+            --card-bg: #1e1e1e;
+            --pattern-color: #333;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            background-image: linear-gradient(135deg, var(--pattern-color) 25%, transparent 25%), 
+                              linear-gradient(225deg, var(--pattern-color) 25%, transparent 25%), 
+                              linear-gradient(45deg, var(--pattern-color) 25%, transparent 25%), 
+                              linear-gradient(315deg, var(--pattern-color) 25%, var(--bg-color) 25%);
+            background-size: 40px 40px;
+            transition: background-color 0.3s;
+        }
+
+        /* ---------- ANIMATIONS ---------- */
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s forwards; }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 80px; background: var(--card-bg); border-bottom: 3px solid var(--text-color);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo-area { cursor: pointer; font-size: 22px; font-weight: 900; line-height: 1; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 800; font-size: 14px; }
+
+        /* ---------- HERO ---------- */
+        .hero-wrapper {
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
+            background: var(--card-bg); margin: 40px 80px; padding: 60px;
+            border: 3px solid var(--text-color); position: relative;
+        }
+        .hero-text h1 { font-size: 50px; margin: 0; line-height: 1; font-weight: 900; border-left: 12px solid var(--accent-pink); padding-left: 20px; }
+        .hero-text p { font-size: 14px; margin-top: 25px; font-weight: 700; text-transform: uppercase; max-width: 450px; }
+        
+        .hero-images { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .img-box { width: 100%; height: 150px; object-fit: cover; border: 2px solid var(--text-color); }
+        .img-large { grid-column: span 2; height: 220px; }
+
+        /* ---------- SURVEY CARDS ---------- */
+        .survey-card { 
+            background: var(--card-bg); padding: 50px; border: 3px solid var(--text-color);
+            max-width: 800px; margin: 40px auto; box-shadow: 12px 12px 0px var(--text-color);
+        }
+
+        .q-wrapper { border-bottom: 2px solid var(--pattern-color); padding: 25px 0; }
+        .option-box { 
+            display: block; padding: 12px; margin: 8px 0; border: 2px solid #eee; 
+            cursor: pointer; font-weight: 600; transition: 0.2s; 
+        }
+        .option-box:hover { background: var(--light-pink); border-color: var(--accent-pink); }
+
+        /* ---------- MODAL / POPUP ---------- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: white; color: black; margin: 10% auto; padding: 40px;
+            border: 4px solid var(--accent-pink); width: 80%; max-width: 500px; text-align: center;
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .admin-btn {
+            background: var(--text-color); color: var(--card-bg); padding: 15px 30px;
+            border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 20px;
+        }
+        .admin-btn:hover { background: var(--accent-pink); color: white; }
+
+        .progress-bar { position: fixed; top: 0; left: 0; height: 10px; background: var(--accent-pink); width: 0%; z-index: 3000; transition: 0.3s; }
+
+        /* ---------- TEAM SECTION ---------- */
+        .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; text-align: left; }
+        .team-member { padding: 10px; border-left: 4px solid var(--accent-pink); background: var(--bg-color); }
+        .role { font-size: 11px; color: var(--accent-pink); display: block; }
+    </style>
+</head>
 <body>
 
 <div id="pBar" class="progress-bar"></div>
 
-<!-- PRIVACY MODAL -->
 <div id="privacyModal" class="modal">
     <div class="modal-content">
-        <h2>PRIVACY NOTICE</h2>
-        <p>
-            Your responses will be collected and used strictly for our academic research study.
-            All data will remain confidential and will only be used for analysis purposes.
-        </p>
-        <button onclick="acceptPrivacy()" class="admin-btn">I AGREE</button>
+        <h2 style="color: var(--accent-pink);">PRIVACY NOTICE</h2>
+        <p style="font-family: Arial; line-height: 1.5;">Your data (Name, Age, Gender, and Learning Style Result) will be collected for our school research contest. By proceeding, you agree to let <b>Group Technology 1 (12 STEM 6)</b> use this information for academic purposes only. Your identity remains protected.</p>
+        <button class="admin-btn" onclick="acceptPrivacy()">I AGREE & START</button>
     </div>
 </div>
 
 <header>
-    <div onclick="nav('pg1')" class="logo-area">
-        LEARNSTYLE+<br>.COM
-    </div>
-
+    <div class="logo-area" onclick="nav('pg1')">LEARNSTYLE+<br>.COM</div>
     <div class="nav-links">
-        <span onclick="nav('pg1')">HOME</span>
-        <span onclick="nav('aboutPage')">ABOUT US</span>
-        <button onclick="document.body.classList.toggle('dark-mode')" class="theme-toggle">
-            DARK MODE
-        </button>
+        <span onclick="nav('pg1')" style="cursor:pointer;">HOME</span>
+        <span onclick="nav('aboutPage')" style="cursor:pointer;">ABOUT US</span>
+        <button class="admin-btn" style="padding: 8px 15px; font-size: 11px;" onclick="document.body.classList.toggle('dark-mode')">DARK MODE</button>
     </div>
 </header>
 
-<!-- HOME -->
 <div id="pg1" class="section active">
     <div class="hero-wrapper">
-
         <div class="hero-text">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
-            <p>Identify your learning style through 25 research questions.</p>
-            <span onclick="nav('pg2')" class="proceed-link">CLICK HERE TO PROCEED</span>
+            <p>A website indicator developed by EAC students to help you identify how you study best through 25 research-backed questions.</p>
+            <div class="admin-btn" style="display:inline-block;" onclick="nav('pg2')">PROCEED TO SURVEY</div>
         </div>
-
         <div class="hero-images">
             <img src="image1.jpg" class="img-box">
             <img src="image2.jpg" class="img-box">
             <img src="image3.jpg" class="img-box">
-            <img src="image4.jpg" class="img-box">
+            <img src="image4.jpg" class="img-box img-large">
             <img src="image5.jpg" class="img-box">
         </div>
-
     </div>
 </div>
 
-<!-- ABOUT -->
 <div id="aboutPage" class="section">
     <div class="survey-card">
-
-        <h2>ABOUT US</h2>
-
-        <p>
-            LearnStyle+.com identifies your learning style through 25 questions and recommends study methods.
-        </p>
-
-        <p>
-            This website is created by EAC-Manila STEM 6 students to study cognitive learning styles.
-        </p>
-
-        <p><strong>RESEARCH TEAM:</strong><br><br>
-        Lordie Granada – Designer & Researcher<br>
-        Samuel Calixtro – Researcher<br>
-        Christian Calma – Researcher<br>
-        Gian Serrano – Researcher<br>
-        Rain Grande – Leader<br>
-        Jairus Bautista – Researcher<br>
-        Jan Jefferson Frio – Developer
-        </p>
-
+        <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px;">ABOUT US</h2>
+        <p style="font-family: Arial; font-weight: 500; line-height: 1.6;">LearnStyle+.com is an initiative by 12 STEM 6 students of Emilio Aguinaldo College-Manila. This project aims to validate the effectiveness of digital indicators in identifying cognitive learning styles.</p>
+        
+        <h3 style="margin-top:40px; text-transform: uppercase;">Our Research Team</h3>
+        <div class="team-grid">
+            <div class="team-member"><span class="role">Project Leader</span>Rain Grande</div>
+            <div class="team-member"><span class="role">Lead Developer</span>Jan Jefferson Frio</div>
+            <div class="team-member"><span class="role">Designer & Researcher</span>Lordie Granada</div>
+            <div class="team-member"><span class="role">Researcher</span>Samuel Calixtro</div>
+            <div class="team-member"><span class="role">Researcher</span>Christian Calma</div>
+            <div class="team-member"><span class="role">Researcher</span>Gian Serrano</div>
+            <div class="team-member"><span class="role">Researcher</span>Jairus Bautista</div>
+        </div>
         <button class="admin-btn" onclick="nav('pg1')">BACK TO HOME</button>
-
     </div>
 </div>
 
-<!-- PROFILE -->
 <div id="pg2" class="section">
     <div class="survey-card">
-
-        <h2>STUDENT PROFILE</h2>
-
-        <label>FULL NAME</label>
-        <input type="text" id="stuName">
-
-        <label>AGE *</label>
-        <input type="number" id="stuAge" value="17">
-
-        <label>GENDER *</label>
-        <select id="stuGender">
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-        </select>
-
-        <button class="admin-btn" onclick="showPrivacy()">START QUESTIONNAIRE</button>
-
+        <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px;">STUDENT PROFILE</h2>
+        <div style="margin-top: 20px;">
+            <label>FULL NAME (OPTIONAL)</label>
+            <input type="text" id="stuName" style="width:100%; padding:15px; margin:10px 0 20px; border:2px solid black; box-sizing: border-box;">
+            <label>AGE *</label>
+            <input type="number" id="stuAge" value="17" style="width:100%; padding:15px; margin:10px 0 20px; border:2px solid black; box-sizing: border-box;">
+            <label>GENDER *</label>
+            <select id="stuGender" style="width:100%; padding:15px; margin:10px 0 30px; border:2px solid black; box-sizing: border-box;">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <button class="admin-btn" onclick="showPrivacy()">START QUESTIONNAIRE</button>
+        </div>
     </div>
 </div>
 
-<!-- QUESTIONS -->
 <div id="pg3" class="section">
     <div class="survey-card">
-
-        <h2>QUESTIONNAIRE</h2>
-
+        <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px;">QUESTIONNAIRE</h2>
         <form id="styleForm" onchange="updateProg()">
             <div id="q-container"></div>
-            <button type="button" class="admin-btn" onclick="finish()">SUBMIT</button>
+            <button type="button" class="admin-btn" id="finishBtn" onclick="finish()">SUBMIT & SAVE RESULTS</button>
         </form>
-
-        <div id="resBox" style="display:none;">
+        <div id="resBox" style="display:none; margin-top: 40px; border: 5px solid var(--accent-pink); padding: 30px; text-align: center;">
             <h2 id="resTitle"></h2>
+            <p>Your data has been successfully securely recorded for the EAC Research Contest.</p>
+            <button onclick="location.reload()" class="admin-btn">RETAKE</button>
         </div>
-
     </div>
 </div>
 
 <script>
-const questions = [
-{q:"When learning something new, do you prefer:",v:"Watch",a:"Listen",p:"Discuss",i:"Read"},
-{q:"Study area?",v:"Visual",a:"Audio",p:"Group",i:"Solo"},
-{q:"Remember list?",v:"Visualize",a:"Repeat",p:"Quiz",i:"Write"},
-{q:"Math solving?",v:"Draw",a:"Talk",p:"Ask",i:"Alone"},
-{q:"Focus?",v:"Board",a:"Lecture",p:"Group",i:"Silent"},
-{q:"Exam study?",v:"Visual",a:"Read aloud",p:"Group",i:"Alone"},
-{q:"Presentation?",v:"Slides",a:"Voice",p:"People",i:"Facts"},
-{q:"Directions?",v:"Map",a:"Hear",p:"Follow",i:"Read"},
-{q:"Focus tool?",v:"Clean space",a:"Music",p:"People",i:"Silence"},
-{q:"Stuck?",v:"Tutorial",a:"Ask",p:"Friend",i:"Self"},
-{q:"Free time?",v:"Movies",a:"Music",p:"Friends",i:"Alone"},
-{q:"Feedback?",v:"Written",a:"Talk",p:"Group",i:"Private"},
-{q:"New app?",v:"Icons",a:"Audio",p:"Friends",i:"Manual"},
-{q:"Project?",v:"Poster",a:"Speech",p:"Group",i:"Paper"},
-{q:"Memory?",v:"Picture",a:"Sound",p:"People",i:"Facts"},
-{q:"Notes?",v:"Color",a:"Keywords",p:"Shared",i:"Detailed"},
-{q:"Buying?",v:"Images",a:"Ask",p:"Friends",i:"Specs"},
-{q:"Lecture?",v:"Draw",a:"Story",p:"Debate",i:"Book"},
-{q:"Explain?",v:"Sketch",a:"Talk",p:"Act",i:"Write"},
-{q:"Aha moment?",v:"See",a:"Hear",p:"Together",i:"Logic"},
-{q:"Break?",v:"Look",a:"Hum",p:"Chat",i:"Think"},
-{q:"Teacher?",v:"Visual",a:"Explain",p:"Interactive",i:"Independent"},
-{q:"Distracted?",v:"Light",a:"Noise",p:"Alone",i:"People"},
-{q:"Brainstorm?",v:"Map",a:"Talk",p:"Partner",i:"List"},
-{q:"Tool?",v:"Highlighter",a:"Recorder",p:"Chat",i:"Notebook"}
-];
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi85rE20-25eZ1S4Yy9wY9YvU9X7e9/exec"; 
 
-window.onload = () => {
-    const container = document.getElementById("q-container");
+    const questions = [
+        { q: "When learning something new, do you prefer to:", v: "Watch a video or diagram", a: "Listen to a verbal explanation", p: "Discuss it with a partner", i: "Read about it on your own" },
+        { q: "Which best describes your study area?", v: "Full of charts and colorful notes", a: "Quiet, or has background music/audio", p: "In a shared space or library with others", i: "Personal desk with minimal distraction" },
+        { q: "How do you best remember a long list?", v: "By visualizing the items in your head", a: "By repeating them out loud", p: "By having someone quiz you", i: "By writing them down privately" },
+        { q: "When solving a math problem, you usually:", v: "Draw out the steps or shapes", a: "Talk yourself through the logic", p: "Ask a classmate for their method", i: "Solve it quietly by yourself" },
+        { q: "In a classroom setting, you focus best when:", v: "The teacher uses a projector/board", a: "The teacher gives a clear lecture", p: "There are group activities", i: "There is silent individual work" },
+        { q: "When studying for an exam, you prefer to:", v: "Review highlighted notes and maps", a: "Read your notes out loud to yourself", p: "Study with a group and quiz each other", i: "Study alone in a silent room" },
+        { q: "During a presentation, you notice:", v: "The quality of the slides and images", a: "The tone and clarity of the speaker", p: "How the audience is interacting", i: "The core facts and details presented" },
+        { q: "When following directions, you prefer:", v: "Looking at a map", a: "Hearing someone tell you the way", p: "Following someone else who knows", i: "Reading written step-by-step notes" },
+        { q: "What helps you focus most?", v: "A clean, organized visual space", a: "Instrumental background music", p: "Being around other people working", i: "Complete silence" },
+        { q: "When you are stuck, you usually:", v: "Look for a tutorial picture", a: "Ask someone to explain it again", p: "Ask a friend to work on it with you", i: "Figure it out alone" },
+        { q: "In your free time, you'd rather:", v: "Watch a movie or browse photos", a: "Listen to a podcast or music", p: "Go out and talk with friends", i: "Work on a hobby alone" },
+        { q: "How do you prefer feedback?", v: "Seeing written comments", a: "Having a one-on-one talk", p: "Discussing it in a group", i: "Reading a private report" },
+        { q: "Learning a new app, you:", v: "Look at icons and screenshots", a: "Listen to the tutorial voice", p: "Play with friends and learn", i: "Read the instruction file" },
+        { q: "Favorite school project?", v: "Designing a poster or video", a: "Giving an oral presentation", p: "Collaborating on a group mural", i: "Writing a research paper" },
+        { q: "Recall a memory, it is usually:", v: "A vivid mental picture", a: "The sounds and words spoken", p: "The feeling of being with people", i: "The facts of what happened" },
+        { q: "Your notes consist of:", v: "Diagrams and colors", a: "Keywords to say out loud", p: "Thoughts from classmates", i: "Detailed sentences" },
+        { q: "Buying something new, you:", v: "Look at the box pictures", a: "Ask for a verbal summary", p: "Check what friends use", i: "Read the specifications" },
+        { q: "During a lecture, you like it when:", v: "The teacher draws on the board", a: "The teacher tells a story", p: "There is a class debate", i: "You follow in your book" },
+        { q: "Explaining an idea, you:", v: "Draw a quick sketch", a: "Use your voice for emphasis", p: "Act it out with others", i: "Write a clear explanation" },
+        { q: "Your 'aha!' moment is:", v: "When I can finally 'see' it", a: "When it 'sounds' right", p: "When we solve it together", i: "When it makes logical sense" },
+        { q: "On a break, you prefer to:", v: "Look out the window", a: "Hum or talk to yourself", p: "Text or call a friend", i: "Close eyes and think" },
+        { q: "Favorite teachers:", v: "Use lots of visual aids", a: "Are great at explaining", p: "Encourage participation", i: "Allow independent time" },
+        { q: "Concentrating, you find:", v: "Bright lights are distracting", a: "Random noises are distracting", p: "Feeling lonely is distracting", i: "People talking is distracting" },
+        { q: "Brainstorming method:", v: "Mind maps or whiteboard", a: "Talking ideas out loud", p: "Bouncing ideas off a partner", i: "Listing pros and cons alone" },
+        { q: "Main school tool:", v: "Highlighters", a: "Audio recording apps", p: "Group chats", i: "A personal notebook" }
+    ];
 
-    questions.forEach((q,i)=>{
-        container.innerHTML += `
-        <div class="q-box">
-            <p>${i+1}. ${q.q}</p>
-            <label><input type="radio" name="q${i}" value="visual" required> ${q.v}</label>
-            <label><input type="radio" name="q${i}" value="auditory"> ${q.a}</label>
-            <label><input type="radio" name="q${i}" value="interpersonal"> ${q.p}</label>
-            <label><input type="radio" name="q${i}" value="independent"> ${q.i}</label>
-        </div>`;
-    });
-};
+    function nav(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0,0);
+    }
 
-function nav(id){
-    document.querySelectorAll('.section').forEach(s=>{
-        s.classList.remove('active');
-        s.style.display="none";
-    });
+    function showPrivacy() { document.getElementById('privacyModal').style.display = 'block'; }
+    function acceptPrivacy() { 
+        document.getElementById('privacyModal').style.display = 'none'; 
+        nav('pg3'); 
+    }
 
-    const next=document.getElementById(id);
-    next.style.display="block";
+    window.onload = function() {
+        const container = document.getElementById('q-container');
+        questions.forEach((item, i) => {
+            container.innerHTML += `
+                <div class="q-wrapper">
+                    <p><strong>${i+1}. ${item.q}</strong></p>
+                    <label class="option-box"><input type="radio" name="q${i}" value="visual" required> ${item.v}</label>
+                    <label class="option-box"><input type="radio" name="q${i}" value="auditory" required> ${item.a}</label>
+                    <label class="option-box"><input type="radio" name="q${i}" value="interpersonal" required> ${item.p}</label>
+                    <label class="option-box"><input type="radio" name="q${i}" value="independent" required> ${item.i}</label>
+                </div>`;
+        });
+    };
 
-    setTimeout(()=>next.classList.add('active'),50);
-}
+    function updateProg() {
+        const data = new FormData(document.getElementById('styleForm'));
+        const count = Array.from(data.keys()).length;
+        document.getElementById('pBar').style.width = (count / 25 * 100) + "%";
+    }
 
-function showPrivacy(){
-    document.getElementById("privacyModal").style.display="flex";
-}
+    async function finish() {
+        const data = new FormData(document.getElementById('styleForm'));
+        const scores = { visual:0, auditory:0, interpersonal:0, independent:0 };
+        let total = 0;
+        for(let v of data.values()) { scores[v]++; total++; }
 
-function acceptPrivacy(){
-    document.getElementById("privacyModal").style.display="none";
-    nav('pg3');
-}
+        if(total < 25) { alert("Please answer all 25 questions!"); return; }
 
-function updateProg(){
-    const data = new FormData(document.getElementById('styleForm'));
-    document.getElementById('pBar').style.width = (data.keys().length / 25 * 100) + "%";
-}
+        const top = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+        const resultLabel = top.toUpperCase() + " LEARNER";
+        const btn = document.getElementById('finishBtn');
+        btn.innerText = "SAVING TO DATABASE..."; btn.disabled = true;
 
-function finish(){
-    alert("Submitted! (You can reconnect your Google Script here)");
-}
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `name=${encodeURIComponent(document.getElementById('stuName').value || "Anonymous")}&age=${document.getElementById('stuAge').value}&gender=${document.getElementById('stuGender').value}&result=${encodeURIComponent(resultLabel)}`
+            });
+            document.getElementById('resBox').style.display = 'block';
+            document.getElementById('resTitle').innerText = "YOUR STYLE: " + resultLabel;
+            document.getElementById('resBox').scrollIntoView({behavior: 'smooth'});
+            btn.style.display = 'none';
+        } catch (e) { alert("Error saving data."); btn.disabled = false; }
+    }
 </script>
-
 </body>
 </html>
