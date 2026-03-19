@@ -67,13 +67,13 @@
 <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
         <h2>PRIVACY NOTICE</h2>
-        <p>LearnStyle+.com collects data for research at EAC-Manila. By clicking "I AGREE", you consent to having your profile and survey results recorded for academic purposes.</p>
-        <button class="btn" onclick="acceptPrivacy()">I AGREE & START SURVEY</button>
+        <p>LearnStyle+.com collects data for research at Emilio Aguinaldo College-Manila. By clicking "I AGREE", you consent to having your student profile and survey responses recorded for academic analysis.</p>
+        <button class="btn" onclick="acceptPrivacy()">I AGREE & PROCEED</button>
         <button class="btn" style="background:#ccc; font-size:10px;" onclick="closeModal()">CANCEL</button>
     </div>
 </div>
 
-<header>
+<header class="no-print">
     <div class="logo-area" onclick="nav('pg1')">LEARNSTYLE+<br>.COM</div>
     <div class="nav-links">
         <span onclick="nav('pg1')" style="cursor:pointer">HOME</span>
@@ -87,7 +87,7 @@
         <div class="hero-text">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
             <p>Identify your cognitive learning style through our 25-question indicator.</p>
-            <button class="btn" onclick="nav('pg2')" style="width: auto; padding: 15px 30px;">PROCEED TO PROFILE</button>
+            <button class="btn" onclick="nav('pg2')" style="width: auto; padding: 15px 40px;">GET STARTED</button>
         </div>
         <div class="leader-grid">
             <img src="image1.jpg" class="img-item img-v">
@@ -102,6 +102,10 @@
 <div id="aboutPage" class="section">
     <div class="survey-card">
         <h2>ABOUT US</h2>
+        <p><b>LEARNSTYLE+.COM</b> is a specialized web-based indicator designed to identify and categorize individual learning styles. Our mission is to help students understand how they process information best—whether visually, through sound, through social interaction, or through independent study.</p>
+        <p>This project is a product for our school's contest, developed by students of <b>Emilio Aguinaldo College-Manila, 12 STEM 6, Group Technology 1</b>.</p>
+        
+        <h3>OUR TEAM</h3>
         <div class="team-grid">
             <div class="member-card"><span class="role">Lead Developer</span>Jan Jefferson Frio</div>
             <div class="member-card"><span class="role">Project Leader</span>Jairus Bautista</div>
@@ -111,6 +115,7 @@
             <div class="member-card"><span class="role">Researcher</span>Gian Serrano</div>
             <div class="member-card"><span class="role">Researcher</span>Rain Grande</div>
         </div>
+        
         <button class="btn" style="background:#444; font-size: 10px; width: auto; margin-top: 40px;" onclick="checkPassword()">ADMIN LOGIN</button>
         <div id="adminPanel" style="display:none; margin-top:20px;">
             <iframe src="https://docs.google.com/spreadsheets/d/1sp2W_PiUb_8nqUS_gMfkx6Gjal5cn9Xs8jvEHBe1ay1dYCR7niYPzAXL/preview" style="width:100%; height:400px; border:2px solid black;"></iframe>
@@ -143,9 +148,13 @@
             <div id="q-container"></div>
             <button type="button" class="btn" id="finishBtn" onclick="finish()">SUBMIT RESULTS</button>
         </form>
+        
         <div id="resBox" style="display:none; text-align: center;">
-            <h1 id="resTitle"></h1>
-            <table class="rec-table"><tbody id="tipBody"></tbody></table>
+            <h1 id="resTitle" style="font-size: 32px; margin: 20px 0;"></h1>
+            <table class="rec-table">
+                <thead><tr><th>Style</th><th>Recommended Strategy</th></tr></thead>
+                <tbody id="tipBody"></tbody>
+            </table>
             <button onclick="window.print()" class="btn" style="background:#3498db;">PRINT RESULT</button>
             <button onclick="location.reload()" class="btn">RETAKE SURVEY</button>
         </div>
@@ -161,13 +170,9 @@
         window.scrollTo(0,0);
     }
 
-    // MODAL LOGIC
     function openPrivacy() { document.getElementById('privacyModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('privacyModal').style.display = 'none'; }
-    function acceptPrivacy() { 
-        closeModal(); 
-        nav('pg3'); // ONLY NOW go to questions
-    }
+    function acceptPrivacy() { closeModal(); nav('pg3'); }
 
     function checkPassword() {
         if (prompt("Enter Admin Password:") === "EAC2026") document.getElementById('adminPanel').style.display = "block";
@@ -175,10 +180,10 @@
     }
 
     const recommendations = {
-        VISUAL: "Use mind maps and color-coded notes.",
-        AUDITORY: "Listen to verbal explanations and read aloud.",
-        INTERPERSONAL: "Participate in study groups.",
-        INDEPENDENT: "Set personal goals and journals."
+        VISUAL: "Utilize mind maps, diagrams, and color-coded note-taking.",
+        AUDITORY: "Listen to verbal explanations and read notes aloud.",
+        INTERPERSONAL: "Engage in study groups and peer discussions.",
+        INDEPENDENT: "Set personal goals and use reflection journals."
     };
 
     const questions = [
@@ -229,7 +234,7 @@
         const data = new FormData(document.getElementById('styleForm'));
         const scores = { visual:0, auditory:0, interpersonal:0, independent:0 };
         for(let v of data.values()) { scores[v]++; }
-        if(Array.from(data.keys()).length < 25) { alert("Please answer all questions!"); return; }
+        if(Array.from(data.keys()).length < 25) { alert("Please answer all 25 questions!"); return; }
 
         const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
         const winners = sorted.filter(s => s[1] === sorted[0][1]).map(s => s[0].toUpperCase());
