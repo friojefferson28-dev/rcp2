@@ -6,103 +6,43 @@
     <title>LearnStyle+ | EAC STEM 6</title>
     <style>
         :root {
-            --base-pink: #D99EC9;
-            --light-pink: #f6d5f7;
-            --bg-color: #fdf2f8; 
-            --text-color: #1a1a1a;
-            --accent-pink: #E91E63;
-            --card-bg: #ffffff;
-            --pattern-color: #f8bbd0;
+            --base-pink: #D99EC9; --light-pink: #f6d5f7; --bg-color: #fdf2f8; 
+            --text-color: #1a1a1a; --accent-pink: #E91E63; --card-bg: #ffffff; --pattern-color: #f8bbd0;
         }
-
-        body.dark-mode {
-            --bg-color: #121212;
-            --text-color: #ffffff;
-            --light-pink: #2c2c2c;
-            --card-bg: #1e1e1e;
-            --pattern-color: #333;
-        }
-
+        body.dark-mode { --bg-color: #121212; --text-color: #ffffff; --light-pink: #2c2c2c; --card-bg: #1e1e1e; --pattern-color: #333; }
         body {
-            margin: 0; padding: 0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            background-image: linear-gradient(135deg, var(--pattern-color) 25%, transparent 25%), 
-                              linear-gradient(225deg, var(--pattern-color) 25%, transparent 25%), 
-                              linear-gradient(45deg, var(--pattern-color) 25%, transparent 25%), 
-                              linear-gradient(315deg, var(--pattern-color) 25%, var(--bg-color) 25%);
-            background-size: 40px 40px;
-            transition: background-color 0.3s;
+            margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--text-color);
+            background-color: var(--bg-color); background-image: linear-gradient(135deg, var(--pattern-color) 25%, transparent 25%), linear-gradient(225deg, var(--pattern-color) 25%, transparent 25%), linear-gradient(45deg, var(--pattern-color) 25%, transparent 25%), linear-gradient(315deg, var(--pattern-color) 25%, var(--bg-color) 25%);
+            background-size: 40px 40px; transition: background-color 0.3s;
         }
-
-        /* ---------- ANIMATIONS ---------- */
         .section { display: none; }
         .section.active { display: block; animation: fadeIn 0.5s forwards; }
-
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(10px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
-        header { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 20px 80px; background: var(--card-bg); border-bottom: 3px solid var(--text-color);
-            position: sticky; top: 0; z-index: 1000;
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 80px; background: var(--card-bg); border-bottom: 3px solid var(--text-color); position: sticky; top: 0; z-index: 1000; }
         .logo-area { cursor: pointer; font-size: 22px; font-weight: 900; line-height: 1; text-transform: uppercase; }
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 800; font-size: 14px; }
-
-        /* ---------- HERO ---------- */
-        .hero-wrapper {
-            display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
-            background: var(--card-bg); margin: 40px 80px; padding: 60px;
-            border: 3px solid var(--text-color); position: relative;
-        }
+        .hero-wrapper { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; background: var(--card-bg); margin: 40px 80px; padding: 60px; border: 3px solid var(--text-color); position: relative; }
         .hero-text h1 { font-size: 50px; margin: 0; line-height: 1; font-weight: 900; border-left: 12px solid var(--accent-pink); padding-left: 20px; }
         .hero-text p { font-size: 14px; margin-top: 25px; font-weight: 700; text-transform: uppercase; max-width: 450px; }
-        
         .hero-images { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
         .img-box { width: 100%; height: 150px; object-fit: cover; border: 2px solid var(--text-color); }
         .img-large { grid-column: span 2; height: 220px; }
-
-        /* ---------- SURVEY CARDS ---------- */
-        .survey-card { 
-            background: var(--card-bg); padding: 50px; border: 3px solid var(--text-color);
-            max-width: 800px; margin: 40px auto; box-shadow: 12px 12px 0px var(--text-color);
-        }
-
+        .survey-card { background: var(--card-bg); padding: 50px; border: 3px solid var(--text-color); max-width: 800px; margin: 40px auto; box-shadow: 12px 12px 0px var(--text-color); }
         .q-wrapper { border-bottom: 2px solid var(--pattern-color); padding: 25px 0; }
-        .option-box { 
-            display: block; padding: 12px; margin: 8px 0; border: 2px solid #eee; 
-            cursor: pointer; font-weight: 600; transition: 0.2s; 
-        }
+        .option-box { display: block; padding: 12px; margin: 8px 0; border: 2px solid #eee; cursor: pointer; font-weight: 600; transition: 0.2s; }
         .option-box:hover { background: var(--light-pink); border-color: var(--accent-pink); }
-
-        /* ---------- MODAL / POPUP ---------- */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background: white; color: black; margin: 10% auto; padding: 40px;
-            border: 4px solid var(--accent-pink); width: 80%; max-width: 500px; text-align: center;
-        }
-
-        /* ---------- BUTTONS ---------- */
-        .admin-btn {
-            background: var(--text-color); color: var(--card-bg); padding: 15px 30px;
-            border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 20px;
-        }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background: white; color: black; margin: 10% auto; padding: 40px; border: 4px solid var(--accent-pink); width: 80%; max-width: 500px; text-align: center; }
+        .admin-btn { background: var(--text-color); color: var(--card-bg); padding: 15px 30px; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 20px; }
         .admin-btn:hover { background: var(--accent-pink); color: white; }
-
         .progress-bar { position: fixed; top: 0; left: 0; height: 10px; background: var(--accent-pink); width: 0%; z-index: 3000; transition: 0.3s; }
-
-        /* ---------- TEAM SECTION ---------- */
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; text-align: left; }
         .team-member { padding: 10px; border-left: 4px solid var(--accent-pink); background: var(--bg-color); }
         .role { font-size: 11px; color: var(--accent-pink); display: block; font-weight: 800; text-transform: uppercase; }
+        
+        /* Recommendation List Styling */
+        #recommendationArea ul { padding-left: 20px; }
+        #recommendationArea li { margin-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -112,7 +52,7 @@
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <h2 style="color: var(--accent-pink);">PRIVACY NOTICE</h2>
-        <p style="font-family: Arial; line-height: 1.5;">Your data (Name, Age, Gender, and Learning Style Result) will be collected for our school research contest. By proceeding, you agree to let <b>Group Technology 1 (12 STEM 6)</b> use this information for academic purposes only. Your identity remains protected.</p>
+        <p style="font-family: Arial; line-height: 1.5;">Your data will be collected for our school research. By proceeding, you agree to let <b>Group Technology 1 (12 STEM 6)</b> use this information for academic purposes only.</p>
         <button class="admin-btn" onclick="acceptPrivacy()">I AGREE & START</button>
     </div>
 </div>
@@ -134,11 +74,11 @@
             <div class="admin-btn" style="display:inline-block;" onclick="nav('pg2')">PROCEED TO SURVEY</div>
         </div>
         <div class="hero-images">
-            <img src="image1.jpg" class="img-box">
-            <img src="image2.jpg" class="img-box">
-            <img src="image3.jpg" class="img-box">
-            <img src="image4.jpg" class="img-box img-large">
-            <img src="image5.jpg" class="img-box">
+            <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e7a7?auto=format&fit=crop&q=80&w=200" class="img-box">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=200" class="img-box">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=200" class="img-box">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=400" class="img-box img-large">
+            <img src="https://images.unsplash.com/photo-1513258496099-48168024adb0?auto=format&fit=crop&q=80&w=200" class="img-box">
         </div>
     </div>
 </div>
@@ -146,15 +86,11 @@
 <div id="aboutPage" class="section">
     <div class="survey-card">
         <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px; text-transform: uppercase;">About Us</h2>
-        
         <div style="font-family: Arial; font-weight: 500; line-height: 1.8; color: var(--text-color);">
             <p>LearnStyle+.com is a website that can identify your learning style by answering 25 questions. It will also recommend best ways to assess your results!</p>
-            
             <p>LearnStyle+.com is made by the students of <b>Emilio Aguinaldo College-Manila, 12 STEM 6, Group Technology 1</b>. It aims to see the validity of this website in identifying students'— specifically from Emilio Aguinaldo College-Manila— Cognitive Learning Style.</p>
         </div>
-        
         <hr style="margin: 40px 0; border: 0; border-top: 2px dashed var(--pattern-color);">
-
         <h3 style="text-transform: uppercase; margin-bottom: 20px;">Our Research Team</h3>
         <div class="team-grid">
             <div class="team-member"><span class="role">Project Leader</span>Jairus Bautista</div>
@@ -165,7 +101,6 @@
             <div class="team-member"><span class="role">Researcher</span>Gian Serrano</div>
             <div class="team-member"><span class="role">Researcher</span>Rain Grande</div>
         </div>
-        
         <button class="admin-btn" onclick="nav('pg1')" style="margin-top: 40px; width: 100%;">BACK TO HOME</button>
     </div>
 </div>
@@ -196,17 +131,15 @@
             <div id="q-container"></div>
             <button type="button" class="admin-btn" id="finishBtn" onclick="finish()">SUBMIT & SAVE RESULTS</button>
         </form>
-        <div id="resBox" style="display:none; margin-top: 40px; border: 5px solid var(--accent-pink); padding: 30px; text-align: center;">
-            <h2 id="resTitle"></h2>
-            <div id="recommendationArea" style="text-align: left; margin: 20px 0; font-family: Arial; line-height: 1.6;"></div>
-            <p>Your data has been successfully recorded for the EAC Research Contest.</p>
-            <button onclick="location.reload()" class="admin-btn">RETAKE</button>
+        <div id="resBox" style="display:none; margin-top: 40px; border: 5px solid var(--accent-pink); padding: 30px;">
+            <h2 id="resTitle" style="text-align: center;"></h2>
+            <div id="recommendationArea" style="margin: 20px 0; font-family: Arial; line-height: 1.6;"></div>
+            <button onclick="location.reload()" class="admin-btn" style="width: 100%;">RETAKE</button>
         </div>
     </div>
 </div>
 
 <script>
-    // LINK FIXED USING YOUR SCREENSHOT
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1eYRVnkt3R8LXYqH3n0JVBVgg1hoga_Ym8BCHL-4S_A8q1_NbeYw1U6f0S3Q-TfU/exec"; 
 
     const questions = [
@@ -244,22 +177,16 @@
     }
 
     function showPrivacy() { document.getElementById('privacyModal').style.display = 'block'; }
-    function acceptPrivacy() { 
-        document.getElementById('privacyModal').style.display = 'none'; 
-        nav('pg3'); 
-    }
+    function acceptPrivacy() { document.getElementById('privacyModal').style.display = 'none'; nav('pg3'); }
 
     window.onload = function() {
         const container = document.getElementById('q-container');
         questions.forEach((item, i) => {
-            container.innerHTML += `
-                <div class="q-wrapper">
-                    <p><strong>${i+1}. ${item.q}</strong></p>
-                    <label class="option-box"><input type="radio" name="q${i}" value="visual" required> ${item.v}</label>
-                    <label class="option-box"><input type="radio" name="q${i}" value="auditory" required> ${item.a}</label>
-                    <label class="option-box"><input type="radio" name="q${i}" value="interpersonal" required> ${item.p}</label>
-                    <label class="option-box"><input type="radio" name="q${i}" value="independent" required> ${item.i}</label>
-                </div>`;
+            container.innerHTML += `<div class="q-wrapper"><p><strong>${i+1}. ${item.q}</strong></p>
+            <label class="option-box"><input type="radio" name="q${i}" value="visual" required> ${item.v}</label>
+            <label class="option-box"><input type="radio" name="q${i}" value="auditory" required> ${item.a}</label>
+            <label class="option-box"><input type="radio" name="q${i}" value="interpersonal" required> ${item.p}</label>
+            <label class="option-box"><input type="radio" name="q${i}" value="independent" required> ${item.i}</label></div>`;
         });
     };
 
@@ -274,36 +201,40 @@
         const scores = { visual:0, auditory:0, interpersonal:0, independent:0 };
         let total = 0;
         for(let v of data.values()) { scores[v]++; total++; }
+        if(total < 25) { alert("Please answer all questions!"); return; }
 
-        if(total < 25) { alert("Please answer all 25 questions!"); return; }
+        const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+        const primary = sorted[0][0];
+        const secondary = sorted[1][0];
+        const comboKey = [primary, secondary].sort().join(' x ');
 
-        const top = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-        const resultLabel = top.toUpperCase() + " LEARNER";
-        
-        // Recommendations logic
-        const recs = {
-            visual: "<b>Recommendation:</b> Use mind maps, color-coded notes, and diagrams. Watching video tutorials and using highlighters will help you retain info better.",
-            auditory: "<b>Recommendation:</b> Read your notes out loud, record lectures to listen back, and participate in group discussions or verbal quizzes.",
-            interpersonal: "<b>Recommendation:</b> Join study groups, teach others what you've learned, and engage in brainstorming sessions with classmates.",
-            independent: "<b>Recommendation:</b> Find a quiet, private space to study. Use journals, self-paced online courses, and set personal goals to track progress."
+        const recommendations = {
+            "auditory x visual": "<h3>Visual × Auditory</h3><ul><li>Watching educational videos with narration.</li><li>Listening to recorded lectures while following diagrams.</li><li>Using video tutorials and animated lessons.</li><li>Combining note taking with color coding while listening.</li><li>Multimedia materials with audio explanations.</li></ul>",
+            "interpersonal x visual": "<h3>Visual × Interpersonal</h3><ul><li>Studying with classmates using diagrams and concept maps.</li><li>Group discussions with visual aids (whiteboards, slides).</li><li>Collaborative mind mapping.</li><li>Group presentations with infographics.</li><li>Study groups using drawings or visual examples.</li></ul>",
+            "independent x visual": "<h3>Visual × Independent</h3><ul><li>Creating personal concept maps and charts.</li><li>Studying alone using educational videos and visual notes.</li><li>Making color-coded summaries.</li><li>Using flashcards with images/symbols for self-study.</li><li>Reflecting on visual materials in study journals.</li></ul>",
+            "auditory x interpersonal": "<h3>Auditory × Interpersonal</h3><ul><li>Participating in study groups where ideas are explained verbally.</li><li>Listening to lectures/recordings with classmates.</li><li>Conductoral reviews or group Q&A sessions.</li><li>Voice discussions via Google Meet or Discord.</li><li>Explaining lessons verbally to peers.</li></ul>",
+            "independent x interpersonal": "<h3>Interpersonal × Independent</h3><ul><li>Balancing group study with personal reflection.</li><li>Reviewing group discussions independently later.</li><li>Writing personal insights in journals after sharing ideas.</li><li>Assessing personal strengths after collaborative activities.</li><li>Combining peer learning with individual goal setting.</li></ul>",
+            "auditory x independent": "<h3>Auditory × Independent</h3><ul><li>Listening to podcasts or recorded lectures during self-study.</li><li>Recording and replaying personal lesson summaries.</li><li>Reading notes aloud while studying alone.</li><li>Practicing self-recitation or oral explanation.</li><li>Listening to audiobooks while reflecting on content.</li></ul>",
+            "visual": "<h3>Visual Style</h3><ul><li>Learning from infographics and concept maps.</li><li>Watching educational videos.</li><li>Using data visualization (charts, graphs, tables).</li><li>Incorporating doodles and sketches into text.</li></ul>",
+            "auditory": "<h3>Auditory Style</h3><ul><li>Taking notes and testing knowledge while listening.</li><li>Consuming educational podcasts or audiobooks.</li><li>Engaging in oral quizzes.</li><li>Attending live lectures or presentations.</li></ul>",
+            "interpersonal": "<h3>Interpersonal Style</h3><ul><li>In-person collaboration and study groups.</li><li>Using social apps (Google Meet, Discord).</li><li>Cooperative games (like flash cards).</li></ul>",
+            "independent": "<h3>Independent Style</h3><ul><li>Using personal diaries, blogs, or error logs.</li><li>Self-evaluation per topic.</li><li>Regularly reviewing own work and self-reflection.</li></ul>"
         };
 
+        let finalRec = recommendations[comboKey] || recommendations[primary];
+        let resultLabel = primary.toUpperCase() + (sorted[0][1] === sorted[1][1] ? " & " + secondary.toUpperCase() : "") + " LEARNER";
+
         const btn = document.getElementById('finishBtn');
-        btn.innerText = "SAVING TO DATABASE..."; btn.disabled = true;
+        btn.innerText = "SAVING..."; btn.disabled = true;
 
         try {
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `name=${encodeURIComponent(document.getElementById('stuName').value || "Anonymous")}&age=${document.getElementById('stuAge').value}&gender=${document.getElementById('stuGender').value}&result=${encodeURIComponent(resultLabel)}`
-            });
+            await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body: `name=${encodeURIComponent(document.getElementById('stuName').value || "Anonymous")}&age=${document.getElementById('stuAge').value}&gender=${document.getElementById('stuGender').value}&result=${encodeURIComponent(resultLabel)}`, headers:{'Content-Type':'application/x-www-form-urlencoded'} });
             document.getElementById('resBox').style.display = 'block';
             document.getElementById('resTitle').innerText = "YOUR STYLE: " + resultLabel;
-            document.getElementById('recommendationArea').innerHTML = recs[top];
+            document.getElementById('recommendationArea').innerHTML = finalRec;
             document.getElementById('resBox').scrollIntoView({behavior: 'smooth'});
             btn.style.display = 'none';
-        } catch (e) { alert("Error saving data. Make sure you deployed your script to 'Anyone'."); btn.disabled = false; }
+        } catch (e) { alert("Error saving."); btn.disabled = false; }
     }
 </script>
 </body>
