@@ -31,7 +31,6 @@
         
         .leader-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
         .img-item { width: 100%; object-fit: cover; border: 2px solid black; transition: 0.3s ease; }
-        .img-v { height: 220px; } .img-wide { grid-column: span 2; height: 180px; } .img-sq { height: 180px; }
 
         .section { display: none; }
         .section.active { display: block; animation: fadeIn 0.5s; }
@@ -44,16 +43,11 @@
         .btn { background: var(--text-color); color: var(--card-bg); padding: 15px; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; width: 100%; margin-top: 20px; text-align: center; display: block; }
         .btn:hover { background: var(--accent-pink); color: white; }
 
-        .rec-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; }
-        .rec-table th, .rec-table td { border: 2px solid var(--text-color); padding: 12px; }
-        .rec-table th { background: var(--pattern-color); text-transform: uppercase; font-size: 12px; }
-
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; text-align: left; }
         .member-card { padding: 12px; border: 2px solid var(--text-color); background: var(--bg-color); }
         .role { font-size: 10px; color: var(--accent-pink); font-weight: 800; text-transform: uppercase; display: block; }
 
         .progress-bar { position: fixed; top: 0; left: 0; height: 10px; background: var(--accent-pink); width: 0%; z-index: 3000; transition: 0.3s; }
-        @media print { .no-print { display: none !important; } .survey-card { border: none; box-shadow: none; margin: 0; padding: 0; } }
     </style>
 </head>
 <body id="body">
@@ -63,7 +57,7 @@
 <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
         <h2>PRIVACY NOTICE</h2>
-        <p>LearnStyle+.com collects data for research at EAC-Manila. By proceeding, you consent to data recording.</p>
+        <p>LearnStyle+.com collects data for research at EAC-Manila. By proceeding, you consent to data recording for academic purposes.</p>
         <button class="btn" onclick="acceptPrivacy()">I AGREE & PROCEED</button>
         <button class="btn" style="background:#ccc; font-size:10px;" onclick="closeModal()">CANCEL</button>
     </div>
@@ -83,14 +77,12 @@
         <div class="hero-text">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
             <p>Identify your cognitive learning style through our 25-question indicator.</p>
-            <a href="#" onclick="openPrivacy()" style="color: var(--text-color); font-weight: 900; font-size: 18px; text-transform: uppercase; text-decoration: underline;">CLICK HERE TO PROCEED</a>
+            <a href="#" onclick="openPrivacy()" style="color: var(--text-color); font-weight: 900; font-size: 18px; text-transform: uppercase; text-decoration: underline;">START TEST</a>
         </div>
         <div class="leader-grid">
-            <img src="image1.jpg" class="img-item img-v">
-            <img src="image2.jpg" class="img-item img-v">
-            <img src="image3.jpg" class="img-item img-v">
-            <img src="image4.jpg" class="img-item img-wide">
-            <img src="image5.jpg" class="img-item img-sq">
+            <img src="image1.jpg" class="img-item">
+            <img src="image2.jpg" class="img-item">
+            <img src="image3.jpg" class="img-item">
         </div>
     </div>
 </div>
@@ -98,10 +90,7 @@
 <div id="aboutPage" class="section">
     <div class="survey-card">
         <h2>ABOUT US</h2>
-        <p>LearnStyle+.com is an indicator website designed to identify learning styles through 25 targeted questions, with personalized study recommendations based on results.</p>
-        <p>Created by students of <b>Emilio Aguinaldo College-Manila, 12 STEM 6, Group Technology 1</b>, this project explores the validity of digital tools in identifying cognitive learning styles.</p>
-        
-        <h3>OUR TEAM</h3>
+        <p>Created by students of <b>Emilio Aguinaldo College-Manila, 12 STEM 6, Group Technology 1</b>.</p>
         <div class="team-grid">
             <div class="member-card"><span class="role">Lead Developer</span>Jan Jefferson Frio</div>
             <div class="member-card"><span class="role">Project Leader</span>Jairus Bautista</div>
@@ -111,8 +100,7 @@
             <div class="member-card"><span class="role">Researcher</span>Gian Serrano</div>
             <div class="member-card"><span class="role">Researcher</span>Rain Grande</div>
         </div>
-        
-        <button class="btn" style="background:#444; font-size: 10px; width: auto; margin-top: 40px;" onclick="checkPassword()">ADMIN LOGIN</button>
+        <button class="btn" style="background:#444; width: auto; margin-top: 40px;" onclick="checkPassword()">ADMIN LOGIN</button>
         <div id="adminPanel" style="display:none; margin-top:20px;">
             <iframe src="https://docs.google.com/spreadsheets/d/1sp2W_PiUb_8nqUS_gMfkx6Gjal5cn9Xs/preview" style="width:100%; height:400px; border:2px solid black;"></iframe>
         </div>
@@ -126,7 +114,7 @@
         <input type="text" id="stuName" placeholder="Leave blank for Anonymous" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
         
         <label>AGE (17-20)</label>
-        <input type="number" id="stuAge" value="17" min="17" max="20" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
+        <input type="number" id="stuAge" value="17" min="17" max="20" oninput="if(value>20)value=20;if(value<17)value=17" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
         
         <label>GENDER</label>
         <select id="stuGender" style="width:100%; padding:15px; margin:10px 0; border:2px solid black; box-sizing: border-box;">
@@ -151,19 +139,15 @@
                 <thead><tr><th>Style</th><th>Recommended Strategy</th></tr></thead>
                 <tbody id="tipBody"></tbody>
             </table>
-            <button onclick="window.print()" class="btn" style="background:#3498db;">PRINT RESULT</button>
-            <button onclick="location.reload()" class="btn">RETAKE SURVEY</button>
+            <button onclick="window.print()" class="btn">PRINT RESULT</button>
+            <button onclick="location.reload()" class="btn" style="background:#ccc;">RETAKE</button>
         </div>
     </div>
 </div>
 
 <script>
-    const SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
-
-    function checkPassword() {
-        if (prompt("Enter Admin Password:") === "EAC2026") document.getElementById('adminPanel').style.display = "block";
-        else alert("Denied.");
-    }
+    // YOUR GOOGLE SCRIPT URL FROM THE IMAGE
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1eYRVnkt3R8LXYqH3n0JVBVgg1hoga_Ym8BCHL-4S_A8q1_NbeYw1U6f0S3Q-TfU/exec";
 
     function nav(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -174,43 +158,43 @@
     function openPrivacy() { document.getElementById('privacyModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('privacyModal').style.display = 'none'; }
     function acceptPrivacy() { closeModal(); nav('pg2'); }
+    function checkPassword() { if (prompt("Admin Password:") === "EAC2026") document.getElementById('adminPanel').style.display = "block"; }
 
     const recommendations = {
-        VISUAL: "Use mind maps, color-coded notes, and diagrams to organize information visually.",
-        AUDITORY: "Record lectures, read notes aloud, and use mnemonic devices involving rhythm.",
-        INTERPERSONAL: "Participate in study groups, teach concepts to others, and use discussion.",
-        INDEPENDENT: "Set personal goals, study in a quiet environment, and use reflection journals."
+        VISUAL: "Use mind maps and diagrams.", AUDITORY: "Listen to lectures and read aloud.",
+        INTERPERSONAL: "Study with groups.", INDEPENDENT: "Quiet reflection and personal goals."
     };
 
     const questions = [
-        { q: "When learning something new, do you prefer to:", v: "Watch a video or diagram", a: "Listen to a verbal explanation", p: "Discuss it with a partner", i: "Read about it on your own" },
-        { q: "Which best describes your study area?", v: "Full of charts and colorful notes", a: "Quiet, or has background music/audio", p: "In a shared space with others", i: "Personal desk with minimal distraction" },
-        { q: "How do you best remember a long list?", v: "By visualizing the items", a: "By repeating them out loud", p: "By having someone quiz you", i: "By writing them down privately" },
-        { q: "When solving a problem, you usually:", v: "Draw out the steps", a: "Talk yourself through it", p: "Ask a classmate for help", i: "Solve it quietly alone" },
-        { q: "You focus best when:", v: "The teacher uses slides", a: "The teacher gives a lecture", p: "There are group activities", i: "There is silent work time" },
-        { q: "When studying for an exam, you prefer to:", v: "Review highlighted notes and maps", a: "Read your notes out loud to yourself", p: "Study with a group and quiz each other", i: "Study alone in a silent room" },
-        { q: "During a presentation, you notice:", v: "The quality of the slides and images", a: "The tone and clarity of the speaker", p: "How the audience is interacting", i: "The core facts and details presented" },
-        { q: "When following directions, you prefer:", v: "Looking at a map", a: "Hearing someone tell you the way", p: "Following someone else who knows", i: "Reading written step-by-step notes" },
-        { q: "What helps you focus most?", v: "A clean, organized visual space", a: "Instrumental background music", p: "Being around other people working", i: "Complete silence" },
-        { q: "When you are stuck, you usually:", v: "Look for a tutorial picture", a: "Ask someone to explain it again", p: "Ask a friend to work on it with you", i: "Figure it out alone" },
-        { q: "In your free time, you'd rather:", v: "Watch a movie or browse photos", a: "Listen to a podcast or music", p: "Go out and talk with friends", i: "Work on a hobby alone" },
-        { q: "How do you prefer feedback?", v: "Seeing written comments", a: "Having a one-on-one talk", p: "Discussing it in a group", i: "Reading a private report" },
-        { q: "Learning a new app, you:", v: "Look at icons and screenshots", a: "Listen to the tutorial voice", p: "Play with friends and learn", i: "Read the instruction file" },
-        { q: "Favorite school project?", v: "Designing a poster or video", a: "Giving an oral presentation", p: "Collaborating on a group mural", i: "Writing a research paper" },
-        { q: "Recall a memory, it is usually:", v: "A vivid mental picture", a: "The sounds and words spoken", p: "The feeling of being with people", i: "The facts of what happened" },
-        { q: "Your notes consist of:", v: "Diagrams and colors", a: "Keywords to say out loud", p: "Thoughts from classmates", i: "Detailed sentences" },
-        { q: "Buying something new, you:", v: "Look at the box pictures", a: "Ask for a verbal summary", p: "Check what friends use", i: "Read the specifications" },
-        { q: "During a lecture, you like it when:", v: "The teacher draws on the board", a: "The teacher tells a story", p: "There is a class debate", i: "You follow in your book" },
-        { q: "Explaining an idea, you:", v: "Draw a quick sketch", a: "Use your voice for emphasis", p: "Act it out with others", i: "Write a clear explanation" },
-        { q: "Your 'aha!' moment is:", v: "When I can finally 'see' it", a: "When it 'sounds' right", p: "When we solve it together", i: "When it makes logical sense" },
-        { q: "On a break, you prefer to:", v: "Look out the window", a: "Hum or talk to yourself", p: "Text or call a friend", i: "Close eyes and think" },
-        { q: "Favorite teachers:", v: "Use lots of visual aids", a: "Are great at explaining", p: "Encourage participation", i: "Allow independent time" },
-        { q: "Concentrating, you find:", v: "Bright lights are distracting", a: "Random noises are distracting", p: "Feeling lonely is distracting", i: "People talking is distracting" },
-        { q: "Brainstorming method:", v: "Mind maps or whiteboard", a: "Talking ideas out loud", p: "Bouncing ideas off a partner", i: "Listing pros and cons alone" },
-        { q: "Main school tool:", v: "Highlighters", a: "Audio recording apps", p: "Group chats", i: "A personal notebook" }
+        { q: "When learning, do you prefer to:", v: "Watch a video", a: "Listen to a lecture", p: "Group work", i: "Individual study" },
+        { q: "Study area preference?", v: "Colorful notes around", a: "Background audio", p: "Shared space", i: "Silent desk" },
+        { q: "Best way to remember a list?", v: "Visualize it", a: "Repeat it out loud", p: "Be quizzed by a friend", i: "Write it privately" },
+        { q: "Solving a problem:", v: "Draw steps", a: "Talk through it", p: "Ask others", i: "Solve alone" },
+        { q: "Focus best when:", v: "Slides are shown", a: "Teacher speaks", p: "Activities happen", i: "Working silently" },
+        { q: "Exam prep style:", v: "Highlight notes", a: "Read aloud", p: "Quiz group", i: "Solo study" },
+        { q: "In presentations, you notice:", v: "Visual quality", a: "Speaker's tone", p: "Audience energy", i: "Facts/Logic" },
+        { q: "Following directions:", v: "See a map", a: "Hear the way", p: "Follow a guide", i: "Read notes" },
+        { q: "Concentration tool:", v: "Organized space", a: "Music", p: "Presence of others", i: "Total silence" },
+        { q: "When stuck:", v: "Look for pictures", a: "Ask for a talk", p: "Ask a partner", i: "Think it out" },
+        { q: "Free time choice:", v: "Watch movies", a: "Listen to music", p: "Socialize", i: "Solo hobby" },
+        { q: "Feedback preference:", v: "Written notes", a: "Verbal discussion", p: "Group critique", i: "Private report" },
+        { q: "New app learning:", v: "Look at icons", a: "Hear tutorials", p: "Play with others", i: "Read manual" },
+        { q: "Project preference:", v: "Poster/Video", a: "Speech/Presentation", p: "Group mural", i: "Research paper" },
+        { q: "Memory recall:", v: "Mental pictures", a: "Spoken words", p: "Group vibes", i: "Specific facts" },
+        { q: "Note-taking style:", v: "Drawings/Colors", a: "Key phrases to say", p: "Peer thoughts", i: "Sentences" },
+        { q: "Shopping style:", v: "Look at box", a: "Ask staff", p: "See friend's choice", i: "Check specs" },
+        { q: "Lecture preference:", v: "Drawing on board", a: "Storytelling", p: "Debates", i: "Reading along" },
+        { q: "Explaining an idea:", v: "Sketch it", a: "Speak it", p: "Act it out", i: "Write it" },
+        { q: "The 'aha!' moment:", v: "I see it", a: "It sounds right", p: "We got it", i: "It makes sense" },
+        { q: "Break time:", v: "Look around", a: "Hum/Whistle", p: "Call/Text", i: "Reflect" },
+        { q: "Favorite teachers:", v: "Use slides", a: "Great speakers", p: "Encourage groups", i: "Allow solo work" },
+        { q: "Major distraction:", v: "Bright lights", a: "Noises", p: "Feeling alone", i: "Talking" },
+        { q: "Brainstorming:", v: "Mind maps", a: "Talking ideas", p: "Bouncing ideas", i: "Pros/Cons list" },
+        { q: "School must-have:", v: "Highlighters", a: "Audio recorder", p: "Group chats", i: "Journal" }
     ];
 
     window.onload = function() {
+        openPrivacy();
         const container = document.getElementById('q-container');
         questions.forEach((item, i) => {
             container.innerHTML += `<div class="q-wrapper"><p><strong>${i+1}. ${item.q}</strong></p>
@@ -230,7 +214,7 @@
         const data = new FormData(document.getElementById('styleForm'));
         const scores = { visual:0, auditory:0, interpersonal:0, independent:0 };
         for(let v of data.values()) { scores[v]++; }
-        if(Array.from(data.keys()).length < 25) { alert("Please complete all questions!"); return; }
+        if(Array.from(data.keys()).length < 25) { alert("Complete all 25 questions!"); return; }
 
         const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
         const winners = sorted.filter(s => s[1] === sorted[0][1]).map(s => s[0].toUpperCase());
