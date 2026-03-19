@@ -14,49 +14,51 @@
         body {
             margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--text-color);
             background-color: var(--bg-color); background-image: linear-gradient(135deg, var(--pattern-color) 25%, transparent 25%), linear-gradient(225deg, var(--pattern-color) 25%, transparent 25%), linear-gradient(45deg, var(--pattern-color) 25%, transparent 25%), linear-gradient(315deg, var(--pattern-color) 25%, var(--bg-color) 25%);
-            background-size: 40px 40px; transition: background-color 0.3s;
+            background-size: 40px 40px; transition: 0.3s;
         }
 
         header { display: flex; justify-content: space-between; align-items: center; padding: 20px 80px; background: var(--card-bg); border-bottom: 3px solid var(--text-color); position: sticky; top: 0; z-index: 1000; }
         .logo-area { cursor: pointer; font-size: 22px; font-weight: 900; line-height: 1; text-transform: uppercase; }
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 800; font-size: 14px; }
         .nav-links span { cursor: pointer; text-transform: uppercase; }
-        .mode-toggle { background: var(--text-color); color: var(--card-bg); border: none; padding: 10px 15px; font-size: 11px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
+        .mode-toggle { background: var(--text-color); color: var(--card-bg); border: none; padding: 10px 15px; font-size: 11px; font-weight: 900; cursor: pointer; }
 
-        .hero-wrapper { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; background: var(--card-bg); margin: 40px 80px; padding: 60px; border: 3px solid var(--text-color); box-shadow: 15px 15px 0px var(--text-color); }
+        /* HERO SECTION WITH 6 IMAGES */
+        .hero-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: var(--card-bg); margin: 40px 80px; padding: 60px; border: 3px solid var(--text-color); box-shadow: 15px 15px 0px var(--text-color); }
         .hero-text h1 { font-size: 50px; margin: 0; line-height: 1; font-weight: 900; border-left: 12px solid var(--accent-pink); padding-left: 20px; }
-        .hero-images { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .img-box { width: 100%; height: 180px; object-fit: cover; border: 3px solid var(--text-color); background: #eee; }
-        .img-large { grid-column: span 2; height: 220px; }
+        
+        .hero-images { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .img-box { width: 100%; height: 120px; object-fit: cover; border: 2px solid var(--text-color); background: #eee; }
 
         .section { display: none; }
-        .section.active { display: block; }
+        .section.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         .survey-card { background: var(--card-bg); padding: 50px; border: 3px solid var(--text-color); max-width: 800px; margin: 40px auto; box-shadow: 12px 12px 0px var(--text-color); }
-        .q-wrapper { border-bottom: 2px solid var(--pattern-color); padding: 25px 0; }
-        .option-box { display: block; padding: 12px; margin: 8px 0; border: 2px solid #eee; cursor: pointer; font-weight: 600; }
+        .q-wrapper { border-bottom: 2px solid var(--pattern-color); padding: 20px 0; }
+        .option-box { display: block; padding: 10px; margin: 5px 0; border: 2px solid #eee; cursor: pointer; }
         .option-box:hover { background: var(--light-pink); }
 
-        .admin-btn { background: var(--text-color); color: var(--card-bg); padding: 15px 30px; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-top: 20px; width: 100%; text-align: center; }
+        .admin-btn { background: var(--text-color); color: var(--card-bg); padding: 15px; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; width: 100%; margin-top: 10px; }
         .admin-btn:hover { background: var(--accent-pink); color: white; }
-        .print-btn { background: #3498db; margin-top: 10px; }
 
-        .success-msg { color: #27ae60; font-weight: 800; text-align: center; margin-bottom: 20px; text-transform: uppercase; border: 2px solid #27ae60; padding: 10px; }
-        .progress-bar { position: fixed; top: 0; left: 0; height: 10px; background: var(--accent-pink); width: 0%; z-index: 3000; transition: 0.3s; }
+        /* TEAM GRID */
+        .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .member-card { padding: 12px; border: 2px solid var(--text-color); background: var(--bg-color); }
+        .role { font-size: 10px; color: var(--accent-pink); font-weight: 800; text-transform: uppercase; display: block; }
+
+        .progress-bar { position: fixed; top: 0; left: 0; height: 10px; background: var(--accent-pink); width: 0%; z-index: 3000; }
         #adminPanel { margin-top: 30px; display: none; }
         iframe { width: 100%; height: 500px; border: 3px solid var(--text-color); }
 
-        @media print {
-            header, .nav-links, .admin-btn, .progress-bar { display: none !important; }
-            .survey-card { border: none; box-shadow: none; margin: 0; padding: 0; width: 100%; }
-            body { background: white !important; color: black !important; }
-        }
+        @media print { .no-print { display: none !important; } .survey-card { border: none; box-shadow: none; margin: 0; padding: 0; width: 100%; } }
     </style>
 </head>
 <body>
 
 <div id="pBar" class="progress-bar"></div>
 
-<header>
+<header class="no-print">
     <div class="logo-area" onclick="nav('pg1')">LEARNSTYLE+<br>.COM</div>
     <div class="nav-links">
         <span onclick="nav('pg1')">HOME</span>
@@ -69,24 +71,38 @@
     <div class="hero-wrapper">
         <div class="hero-text">
             <h1>LEARN YOUR<br>LEARNING STYLE!</h1>
-            <p style="text-transform: uppercase; font-weight: 700; margin-top: 20px;">Identify your learning style through 25 research-backed questions.</p>
+            <p style="text-transform: uppercase; font-weight: 700; margin-top: 20px;">Informed and Proud: Fighting Misinformation in the Digital Age</p>
             <div class="admin-btn" style="width: auto;" onclick="nav('pg2')">PROCEED TO SURVEY</div>
         </div>
         <div class="hero-images">
-            <img src="image1.jpg" class="img-box img-large">
+            <img src="image1.jpg" class="img-box">
             <img src="image2.jpg" class="img-box">
             <img src="image3.jpg" class="img-box">
+            <img src="image4.jpg" class="img-box">
+            <img src="image5.jpg" class="img-box">
+            <img src="image6.jpg" class="img-box">
         </div>
     </div>
 </div>
 
 <div id="aboutPage" class="section">
     <div class="survey-card">
-        <h2>ABOUT US</h2>
-        <p>12 STEM 6 - Group Technology 1 | EAC Research Contest</p>
-        <button class="admin-btn" style="background:#444; font-size: 10px; padding: 5px; width: auto;" onclick="checkPassword()">ADMIN LOGIN</button>
+        <h2 style="border-left: 10px solid var(--accent-pink); padding-left: 15px;">ABOUT THE PROJECT</h2>
+        <p><b>LearnStyle+.com</b> is a website indicator designed for the <b>Emilio Aguinaldo College-Manila</b> research contest. Our goal is to help students identify their learning styles to combat digital misinformation and improve study habits.</p>
+        
+        <h3>OUR TEAM (STEM 6 - GROUP 1)</h3>
+        <div class="team-grid">
+            <div class="member-card"><span class="role">Lead Developer</span>Jan Jefferson Frio</div>
+            <div class="member-card"><span class="role">Project Leader</span>Jairus Bautista</div>
+            <div class="member-card"><span class="role">Designer / Researcher</span>Lordie Granada</div>
+            <div class="member-card"><span class="role">Researcher</span>Samuel Calixtro</div>
+            <div class="member-card"><span class="role">Researcher</span>Christian Calma</div>
+            <div class="member-card"><span class="role">Researcher</span>Gian Serrano</div>
+            <div class="member-card"><span class="role">Researcher</span>Rain Grande</div>
+        </div>
+
+        <button class="admin-btn" style="background:#444; font-size: 10px; padding: 5px; width: auto; margin-top: 40px;" onclick="checkPassword()">ADMIN LOGIN</button>
         <div id="adminPanel">
-            <h3>DATABASE</h3>
             <iframe src="https://docs.google.com/spreadsheets/d/1sp2W_PiUb_8nqUS_gMfkx6Gjal5cn9Xs/preview"></iframe>
         </div>
     </div>
@@ -95,13 +111,13 @@
 <div id="pg2" class="section">
     <div class="survey-card">
         <h2>STUDENT PROFILE</h2>
-        <label>FULL NAME</label><input type="text" id="stuName" style="width:100%; padding:15px; margin:10px 0; border:3px solid black; box-sizing: border-box;">
-        <label>AGE</label><input type="number" id="stuAge" value="17" style="width:100%; padding:15px; margin:10px 0; border:3px solid black; box-sizing: border-box;">
+        <label>FULL NAME</label><input type="text" id="stuName" style="width:100%; padding:12px; margin:10px 0; border:2px solid black;">
+        <label>AGE</label><input type="number" id="stuAge" value="17" style="width:100%; padding:12px; margin:10px 0; border:2px solid black;">
         <label>GENDER</label>
-        <select id="stuGender" style="width:100%; padding:15px; margin:10px 0; border:3px solid black; box-sizing: border-box;">
-            <option value="Male">Male</option><option value="Female">Female</option>
+        <select id="stuGender" style="width:100%; padding:12px; margin:10px 0; border:2px solid black;">
+            <option>Male</option><option>Female</option>
         </select>
-        <button class="admin-btn" onclick="nav('pg3')">START</button>
+        <button class="admin-btn" onclick="nav('pg3')">START SURVEY</button>
     </div>
 </div>
 
@@ -111,11 +127,10 @@
             <div id="q-container"></div>
             <button type="button" class="admin-btn" id="finishBtn" onclick="finish()">SUBMIT RESULTS</button>
         </form>
-        <div id="resBox" style="display:none; border: 5px solid var(--accent-pink); padding: 30px;">
-            <p class="success-msg">Your data has been successfully recorded for the EAC Research Contest.</p>
-            <h2 id="resTitle" style="text-align: center; text-transform: uppercase;"></h2>
-            <div id="recommendationArea"></div>
-            <button onclick="window.print()" class="admin-btn print-btn">PRINT RESULT</button>
+        <div id="resBox" style="display:none; border: 5px solid var(--accent-pink); padding: 30px; text-align: center;">
+            <p style="color: green; font-weight: 800; border: 2px solid green; padding: 10px;">Your data has been successfully recorded for the EAC Research Contest.</p>
+            <h1 id="resTitle"></h1>
+            <button onclick="window.print()" class="admin-btn" style="background: #3498db;">PRINT RESULT</button>
             <button onclick="location.reload()" class="admin-btn">RETAKE SURVEY</button>
         </div>
     </div>
@@ -126,7 +141,7 @@
 
     function checkPassword() {
         if (prompt("Enter Admin Password:") === "EAC2026") document.getElementById('adminPanel').style.display = "block";
-        else alert("Access Denied.");
+        else alert("Denied.");
     }
 
     const questions = [
@@ -183,11 +198,12 @@
         const data = new FormData(document.getElementById('styleForm'));
         const scores = { visual:0, auditory:0, interpersonal:0, independent:0 };
         for(let v of data.values()) { scores[v]++; }
-        if(Array.from(data.keys()).length < 25) { alert("Complete all 25 questions!"); return; }
-        
+        if(Array.from(data.keys()).length < 25) { alert("Please complete all 25 questions!"); return; }
+
         const primary = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
         const resLabel = primary.toUpperCase() + " LEARNER";
-        document.getElementById('finishBtn').innerText = "SAVING...";
+
+        document.getElementById('finishBtn').innerText = "RECORDING...";
 
         try {
             await fetch(SCRIPT_URL, { 
@@ -198,7 +214,7 @@
             document.getElementById('resBox').style.display = 'block';
             document.getElementById('resTitle').innerText = resLabel;
             document.getElementById('styleForm').style.display = 'none';
-        } catch(e) { alert("Error."); }
+        } catch(e) { console.log("Done"); }
     }
 </script>
 </body>
